@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Line endX="497.0" layoutX="101.0" layoutY="220.0" startX="-100.0" />
+      <Line endX="-93.5" endY="166.0" layoutX="427.0" layoutY="53.0" startX="-93.5" startY="-49.0" />
+      <ImageView fitHeight="202.0" fitWidth="318.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+      <Line endX="497.0" layoutX="109.0" layoutY="74.0" startX="224.5" />
+      <Line endX="497.0" layoutX="109.0" layoutY="150.0" startX="224.5" />
+      <Label layoutX="404.0" layoutY="14.0" prefHeight="53.0" prefWidth="131.0" text="ssssss">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="339.0" layoutY="86.0" prefHeight="53.0" prefWidth="75.0" text="price:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="481.0" layoutY="85.0" prefHeight="53.0" prefWidth="105.0" text="555$">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="339.0" layoutY="160.0" prefHeight="53.0" prefWidth="75.0" text="date:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="455.0" layoutY="160.0" prefHeight="53.0" prefWidth="131.0" text="2022/06/04">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="14.0" layoutY="228.0" prefHeight="128.0" prefWidth="558.0" text="text goes here&#10;" />
+      <Button layoutX="535.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;2196f3&quot;;">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="80.0" onDragDetected="#returnClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@390-3902765_return-button-return-button-image-png-transparent-png.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="277.0" layoutY="358.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;4caf50&quot;;">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" onDragDetected="#returnClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@chatWhite.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
