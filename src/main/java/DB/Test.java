@@ -34,14 +34,10 @@ public class Test
         System.out.println(DBMethods.makeNewAD(ad5));
         System.out.println(DBMethods.makeNewAD(ad6));
         System.out.println(DBMethods.makeNewAD(ad7));
-        for (int i = 0 ; i < AD.counter ; i++)
-        {
-            System.out.println(DBMethods.findAdByPriceRange("0" , "20000").get(i).get("price"));
-        }
-        /*JsonArray jsonArray = new JsonArray();
-        jsonArray.add("a");
-        jsonArray.add("f");
-        System.out.println(jsonArray.get(1));
-        */
+        Message message = new Message("salam khobi?" , User.makeUserObjectWithJson(DBMethods.findUserInDB("a")) , User.makeUserObjectWithJson(DBMethods.findUserInDB("john")));
+        Message message1 = new Message("salam , mersi" , User.makeUserObjectWithJson(DBMethods.findUserInDB("john")) , User.makeUserObjectWithJson(DBMethods.findUserInDB("a")));
+        Chat chat = new Chat(User.makeUserObjectWithJson(DBMethods.findUserInDB("a")), User.makeUserObjectWithJson(DBMethods.findUserInDB("john")));
+        chat.addMessage(message);
+        chat.addMessage(message1);
     }
 }

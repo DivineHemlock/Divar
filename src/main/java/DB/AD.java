@@ -1,6 +1,7 @@
 package DB;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AD
 {
@@ -10,18 +11,20 @@ public class AD
     private String city;
     private String price;
     private User user;
-    //private String date;
+    private Date submitDate;
+    private Date expirationDate;
     private String info;
     private String ID;
     private ArrayList<String> tags = new ArrayList<>();
 
-    public AD(String name, String city, String price, User user, /*String date,*/ String info, ArrayList<String> tags)
+    public AD(String name, String city, String price, User user,String info, ArrayList<String> tags)
     {
         this.name = name;
         this.city = city;
         this.price = price;
         this.user = user;
-        //this.date = date;
+        //this.submitDate = new Date();
+        //this.expirationDate =
         this.info = info;
         this.ID = String.valueOf(counter);
         this.pictureName = ID;
@@ -69,13 +72,21 @@ public class AD
         this.user = user;
     }
 
-    /*public String getDate() {
-        return date;
+    public Date getSubmitDate() {
+        return submitDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }*/
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
 
     public String getInfo() {
         return info;

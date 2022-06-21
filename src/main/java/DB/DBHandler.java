@@ -13,6 +13,7 @@ public class DBHandler
     private MongoDatabase mainDB;
     private MongoCollection users;
     private MongoCollection ads;
+    private MongoCollection chats;
 
     public DBHandler()
     {
@@ -20,6 +21,7 @@ public class DBHandler
         this.mainDB = mongoClient.getDatabase("mainDB");
         this.users = mainDB.getCollection("users");
         this.ads = mainDB.getCollection("ads");
+        this.chats = mainDB.getCollection("chats");
     }
 
     public MongoClient getMongoClient() {
@@ -52,5 +54,13 @@ public class DBHandler
 
     public void setAds(MongoCollection ads) {
         this.ads = ads;
+    }
+
+    public MongoCollection getChats() {
+        return chats;
+    }
+
+    public void setChats(MongoCollection chats) {
+        this.chats = chats;
     }
 }
