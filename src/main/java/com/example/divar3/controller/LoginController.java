@@ -1,5 +1,7 @@
 package com.example.divar3.controller;
 
+import Socket.Client;
+import Socket.TransferInfos;
 import com.example.divar3.Network;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -10,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class LoginController {
 
@@ -27,6 +30,11 @@ public class LoginController {
         Gson gson = new Gson();
         String username = usernameField.getText();
         String password = passwordField.getText();
+
+        TransferInfos.username = username;
+        Socket socket = new Socket("127.0.0.1", 3191);
+        Client client = new Client(socket, TransferInfos.username);
+        socket.getOutputStream();
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("username", username);
         jsonObject.addProperty("password", password);

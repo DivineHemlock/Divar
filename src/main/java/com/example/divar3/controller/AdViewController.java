@@ -4,6 +4,7 @@ import com.example.divar3.HelloController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -25,15 +26,13 @@ public class AdViewController {
         grid.setVgap(22);
         for (int i = 0; i < 50; i ++){
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(HelloController.class.getResource("testButton.fxml"));
-            Button button = fxmlLoader.load();
-            button.setMaxHeight(grid.getHeight());
-            button.setMaxWidth(grid.getWidth());
+            fxmlLoader.setLocation(HelloController.class.getResource("hyperLink.fxml"));
+            Hyperlink hyperlink = fxmlLoader.load();
             if (columns == 2){
                 columns = 0;
                 rows ++;
             }
-            grid.add(button, columns++, rows);
+            grid.add(hyperlink, columns++, rows);
         }
     }
 

@@ -1,6 +1,8 @@
 package Socket;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,6 +20,15 @@ public class Server {
             while (!serverSocket.isClosed()){
                 Socket socket = serverSocket.accept();
                 System.out.println("A new client has connected!");
+
+//                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+//
+                String username = (String) objectInputStream.readObject();
+
+                System.out.println(username);
+                System.out.println("ok shod");
+
                 ClientHandler client = new ClientHandler(socket);
 
                 Thread thread = new Thread(client);
@@ -25,6 +36,8 @@ public class Server {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

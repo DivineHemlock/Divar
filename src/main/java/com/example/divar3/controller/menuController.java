@@ -1,21 +1,22 @@
 package com.example.divar3.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class menuController {
 
     //private User user; + setter;
 
     @FXML
-    private ChoiceBox<?> citiesChoicebox;
+    private ChoiceBox<String> citiesChoicebox;
 
     @FXML
     private TextField fromTextField;
@@ -44,7 +45,12 @@ public class menuController {
         String from = fromTextField.getText();
         String to = toTextField.getText();
         String search = searchTextfield.getText();
-        System.out.println("search : " + search + " from " + from + " to " + to );
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("a");
+        arrayList.add("b");
+        ObservableList<String> observableList = FXCollections.observableArrayList(arrayList);
+        citiesChoicebox.setItems(observableList);
+
     }
 
 }
