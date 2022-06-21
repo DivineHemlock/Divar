@@ -2,6 +2,7 @@ package com.example.divar3.controller;
 
 import com.example.divar3.Network;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,6 +20,8 @@ public class SignUpController {
     @FXML
     private PasswordField passwordField;
 
+    @FXML
+    private TextField cityField;
 
     @FXML
     private TextField phoneNumberField;
@@ -46,24 +49,15 @@ public class SignUpController {
             incorrectNumber.setVisible(true);
             return;
         }
-        // User user = new User (name, city, password, phone)
-        // send user
         String password = passwordField.getText();
         String username = usernameField.getText();
         String phoneNumber = phoneNumberField.getText();
-        String[] datas = new String[3];
-        datas[0] = username;
-        datas[1] = password;
-        datas[2] = phoneNumber;
-        try {
-            Gson gson = new Gson();
-            String data = gson.toJson(datas);
-            Network.sendData(data);
-        }
-        catch (Exception e){
-            System.out.println("gg");
-            usernameField.setText("could not connect");
-        }
+        String city = cityField.getText();
+        //User user = new user(pas city num name);
+        //string data = json
+        //Client client = ClientHolder.get();
+        //Request request ..
+        //client.main()
     }
 
     // the function below checks the validity of a phone number
@@ -86,7 +80,8 @@ public class SignUpController {
     }
 
     private boolean isFieldEmpty(){
-        if (usernameField.getText().equals("") || passwordField.getText().equals("") || phoneNumberField.getText().equals("")){
+        if (usernameField.getText().equals("") || passwordField.getText().equals("") || phoneNumberField.getText().equals("") ||
+        cityField.getText().equals("")){
             return true;
         }
         else {

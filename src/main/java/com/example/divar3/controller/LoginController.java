@@ -1,6 +1,8 @@
 package com.example.divar3.controller;
 
 import com.example.divar3.Network;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,15 +24,17 @@ public class LoginController {
         if (isFieldEmpty()){
             return;
         }
+        Gson gson = new Gson();
         String username = usernameField.getText();
         String password = passwordField.getText();
-        try {
-            Network.sendData(username);
-            Network.sendData(password);
-        }
-        catch (Exception exception){
-
-        }
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("username", username);
+        jsonObject.addProperty("password", password);
+        String data = gson.toJson(jsonObject);
+        //request
+        //json request
+        // Client client =  ClientHolder.get
+        //client.Main()
     }
 
     @FXML
