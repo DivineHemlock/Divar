@@ -14,8 +14,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        PageController.open("signUp");
-        PageController.close();
-        PageController.open("menu");
+        //Client client =
+        //Clientholder.setClient()
+        PageController.open("loginPage");
     }
 }
