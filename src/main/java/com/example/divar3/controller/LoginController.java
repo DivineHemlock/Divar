@@ -1,7 +1,7 @@
 package com.example.divar3.controller;
 
-import Socket.Client;
-import Socket.TransferInfos;
+//import Socket.Client;
+//import Socket.TransferInfos;
 import com.example.divar3.Network;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -31,9 +31,9 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        TransferInfos.username = username;
+        //TransferInfos.username = username;
         Socket socket = new Socket("127.0.0.1", 3191);
-        Client client = new Client(socket, TransferInfos.username);
+        //Client client = new Client(socket, TransferInfos.username);
         socket.getOutputStream();
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("username", username);

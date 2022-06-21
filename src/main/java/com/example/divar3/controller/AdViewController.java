@@ -32,6 +32,8 @@ public class AdViewController {
                 columns = 0;
                 rows ++;
             }
+            HyperLinkController hyperLinkController = fxmlLoader.getController();
+            hyperLinkController.setColor(i);
             grid.add(hyperlink, columns++, rows);
         }
     }
