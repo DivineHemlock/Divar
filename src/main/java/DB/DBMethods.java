@@ -187,15 +187,59 @@ public class DBMethods
         }
     }
 
-    /*public static ArrayList<JsonObject> findAdByTag (String tag)
+    public static ArrayList<Document> findAdByTag (String tag)
     {
+        ArrayList<Document> ans = new ArrayList<>();
         DBHandler handler = new DBHandler();
-        Document doc = new Document("tag" , tag);
+        for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID",iAsString);
+            ArrayList<String> tagList = new ArrayList<>();
+            tagList = (ArrayList<String>) handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("tags");
+            if (tagList.contains(tag))
+            {
+                ans.add(handler.getMainDB().getCollection("ads").find(testDoc).cursor().next());
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
 
-    }*/
+    public static ArrayList<Document> findAdByCity (String city)
+    {
+        ArrayList<Document> ans = new ArrayList<>();
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID",iAsString);
+            if (handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("city").equals(city))
+            {
+                ans.add(handler.getMainDB().getCollection("ads").find(testDoc).cursor().next());
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
 
-
-
-
-
+    public static ArrayList<Document> findAdByPriceRange (String minPrice , String maxPrice)
+    {
+        int minPriceAsInt = Integer.parseInt(minPrice);
+        int maxPriceAsInt = Integer.parseInt(maxPrice);
+        ArrayList<Document> ans = new ArrayList<>();
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID" , iAsString);
+            int adPrice = Integer.parseInt((String) handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("price")) ;
+            if (adPrice >= minPriceAsInt && adPrice <= maxPriceAsInt)
+            {
+                ans.add(handler.getMainDB().getCollection("ads").find(testDoc).cursor().next());
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class AD
 {
-    private static int counter = 0;
+    public static int counter = 0;
     private String name;
     private String pictureName;
     private String city;
