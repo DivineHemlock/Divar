@@ -1,54 +1,71 @@
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server{
-    public static final int PORT = 3192;
-    private final ServerSocket serverSocket;
+public class Server {
+    public static void main(String[] args) {
+        ServerSocket server = null;
+        try{
+            server = new ServerSocket(32000);
+            server.setReuseAddress(true);
+            while (true){
+                Socket client = server.accept();
+                System.out.println("New client connected");
+                ClientHandler clientSock = new ClientHandler(client);
 
-    public Server(ServerSocket serverSocket){
-        this.serverSocket = serverSocket;
-    }
-
-    public void startServer() {
-
-        try {
-            while (!serverSocket.isClosed()){
-                Socket socket = serverSocket.accept();
-                System.out.println("A new client has connected!");
-
-                ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-
-                Message message = (Message) objectInputStream.readObject();
-
-                System.out.println(message.getSender());
-
-                Client client = new Client();
-                Thread thread = new Thread(client);
-                thread.start();
+                new Thread(clientSock).start();
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e){
             e.printStackTrace();
+        } finally {
+            if (server != null){
+                try{
+                    server.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    public void closeServerSocket(){
-        try {
-            if (serverSocket != null){
-                serverSocket.close();
+    private static class ClientHandler implements Runnable{
+
+        private final Socket clientSocket;
+
+        public ClientHandler(Socket socket){
+            this.clientSocket = socket;
+        }
+
+        @Override
+        public void run() {
+            PrintWriter out = null;
+            BufferedReader in = null;
+            try {
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                String line;
+                while ((line = in.readLine()) != null){
+                    System.out.printf("Sent from the client: %s\n", line);
+                    out.println(line + "mmmmm");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try{
+                    if (out != null){
+                        out.close();
+                    }
+                    if (in != null){
+                        in.close();
+                    }
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
+}
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(PORT);
-        Server server = new Server(serverSocket);
-        server.startServer();
-        server.closeServerSocket();
-    }
-} 
