@@ -13,6 +13,10 @@ public class HyperLinkController {
 
     }
 
+    public void setText(String s){
+        hyperLink.setText(s);
+    }
+
     public void setColor(int i){
         if (i % 4 == 1){
             hyperLink.setStyle("-fx-background-color: \"33ffe3\"");

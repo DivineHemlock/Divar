@@ -20,21 +20,22 @@ public class AdViewController {
     public void addButton() throws IOException {
         int columns = 0;
         int rows = 2;
-        FXMLLoader loader = new FXMLLoader(HelloController.class.getResource("adViewReturnButton.fxml"));
-        AnchorPane anchorPane = loader.load();
+        FXMLLoader profileLoader = new FXMLLoader(HelloController.class.getResource("profileButton.fxml"));
+        AnchorPane profileAnchorPane = profileLoader.load();
+        grid.add(profileAnchorPane,0,1);
+        FXMLLoader returnloader = new FXMLLoader(HelloController.class.getResource("adViewReturnButton.fxml"));
+        AnchorPane anchorPane = returnloader.load();
         grid.add(anchorPane,1, 1);
         grid.setVgap(22);
         for (int i = 0; i < 50; i ++){
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(HelloController.class.getResource("hyperLink.fxml"));
-            Hyperlink hyperlink = fxmlLoader.load();
+            fxmlLoader.setLocation(HelloController.class.getResource("adElement.fxml"));
+            AnchorPane adElement = fxmlLoader.load();
             if (columns == 2){
                 columns = 0;
                 rows ++;
             }
-            HyperLinkController hyperLinkController = fxmlLoader.getController();
-            hyperLinkController.setColor(i);
-            grid.add(hyperlink, columns++, rows);
+            grid.add(adElement, columns++, rows);
         }
     }
 

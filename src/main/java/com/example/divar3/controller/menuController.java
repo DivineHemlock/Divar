@@ -28,6 +28,11 @@ public class menuController {
     private TextField searchTextfield;
 
     @FXML
+    void profileButtonClicked(ActionEvent event) {
+
+    }
+
+    @FXML
     void createAdCliclked(ActionEvent event) throws IOException {
         PageController.close();
         FXMLLoader loader = PageController.open("createAd");

@@ -40,7 +40,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane  fx:controller="com.example.divar3.controller.LoginController" maxHeight="-1.0" maxWidth="-1.0" prefHeight="396.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="396.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.LoginController">
    <children>
       <TextField fx:id="usernameField" layoutX="246.0" layoutY="163.0" />
       <PasswordField fx:id="passwordField" layoutX="246.0" layoutY="188.0" />
@@ -59,8 +59,8 @@
             <Image url="@888848.png" />
          </image>
       </ImageView>
-      <Button layoutX="341.0" layoutY="232.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;2196f3&quot;;" text="sign up" textFill="WHITE" />
-      <Button layoutX="229.0" layoutY="232.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;;" text="log in" textFill="WHITE" />
-      <Label disable="true" layoutX="233.0" layoutY="276.0" prefHeight="24.0" prefWidth="198.0" text="password or username is not correct" textFill="RED" />
+      <Button layoutX="335.0" layoutY="232.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;" text="sign up" textFill="WHITE" />
+      <Button layoutX="234.0" layoutY="232.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="log in" textFill="WHITE" />
+      <Label fx:id="incorectLogin" layoutX="233.0" layoutY="276.0" prefHeight="24.0" prefWidth="198.0" text="password or username is not correct" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

@@ -5,10 +5,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="252.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="232.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;2196f3&quot;;">
+      <Button layoutX="200.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>

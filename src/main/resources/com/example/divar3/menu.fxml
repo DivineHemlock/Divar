@@ -64,11 +64,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="524.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@username-icon-3.png" />
-         </image>
-      </ImageView>
       <Button layoutX="542.0" layoutY="344.0" mnemonicParsing="false" onAction="#returnClicked" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;2196f3&quot;;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
@@ -85,5 +80,14 @@
          </font>
       </Label>
       <TextField fx:id="toTextField" layoutX="218.0" layoutY="116.0" prefHeight="25.0" prefWidth="82.0" />
+      <Button layoutX="515.0" layoutY="17.0" mnemonicParsing="false" onAction="#profileButtonClicked" prefHeight="39.0" prefWidth="43.0" style="-fx-background-radius: 50%; -fx-border-radius: 50%; -fx-border-color: &quot;ffffff&quot;;">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@userIcon2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

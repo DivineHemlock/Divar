@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="154.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.ProfileButtonController">
+   <children>
+      <Button layoutX="14.0" mnemonicParsing="false" onAction="#profileButtonClicked" prefHeight="39.0" prefWidth="43.0" style="-fx-background-radius: 50%; -fx-border-radius: 50%; -fx-border-color: &quot;ffffff&quot;;">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@userIcon2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

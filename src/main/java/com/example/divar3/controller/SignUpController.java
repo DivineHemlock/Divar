@@ -33,9 +33,8 @@ public class SignUpController {
     @FXML
     private Label incorrectNumber;
 
-
     @FXML
-    void returnClicked(ActionEvent event) throws IOException {
+    void LoginClicked(ActionEvent event) throws IOException {
         PageController.close();
         PageController.open("loginPage");
     }
