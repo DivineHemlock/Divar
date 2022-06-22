@@ -40,27 +40,27 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="396.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.LoginController">
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="396.0" prefWidth="649.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.LoginController">
    <children>
-      <TextField fx:id="usernameField" layoutX="246.0" layoutY="163.0" />
-      <PasswordField fx:id="passwordField" layoutX="246.0" layoutY="188.0" />
-      <ImageView fitHeight="24.0" fitWidth="29.0" layoutX="395.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="usernameField" layoutX="246.0" layoutY="159.0" promptText="username" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <PasswordField fx:id="passwordField" layoutX="246.0" layoutY="193.0" promptText="password" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <ImageView fitHeight="24.0" fitWidth="29.0" layoutX="400.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@username-icon-3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="395.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="400.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@207-2073115_font-password-comments-password-icon-png-transparent.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="256.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="235.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@888848.png" />
+            <Image url="@EBay_logo.png" />
          </image>
       </ImageView>
       <Button layoutX="335.0" layoutY="232.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;" text="sign up" textFill="WHITE" />
-      <Button layoutX="234.0" layoutY="232.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="log in" textFill="WHITE" />
+      <Button layoutX="237.0" layoutY="232.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="log in" textFill="WHITE" />
       <Label fx:id="incorectLogin" layoutX="233.0" layoutY="276.0" prefHeight="24.0" prefWidth="198.0" text="password or username is not correct" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

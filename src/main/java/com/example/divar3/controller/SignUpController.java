@@ -1,27 +1,23 @@
 package com.example.divar3.controller;
 
-import com.example.divar3.Network;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class SignUpController {
 
-    //private String cities  + setter
-    @FXML
-    private PasswordField passwordField;
 
     @FXML
-    private TextField cityField;
+    private Label incorrectNumber;
+
+    @FXML
+    private PasswordField passwordField;
 
     @FXML
     private TextField phoneNumberField;
@@ -29,9 +25,8 @@ public class SignUpController {
     @FXML
     private TextField usernameField;
 
-    // label for incorrect phone number
     @FXML
-    private Label incorrectNumber;
+    private ChoiceBox<?> cityChoiceBox;
 
     @FXML
     void LoginClicked(ActionEvent event) throws IOException {
@@ -51,7 +46,6 @@ public class SignUpController {
         String password = passwordField.getText();
         String username = usernameField.getText();
         String phoneNumber = phoneNumberField.getText();
-        String city = cityField.getText();
         //User user = new user(pas city num name);
         //string data = json
         //Client client = ClientHolder.get();
@@ -59,7 +53,16 @@ public class SignUpController {
         //client.main()
     }
 
-    // the function below checks the validity of a phone number
+    private boolean isFieldEmpty(){
+        if (usernameField.getText().equals("") || passwordField.getText().equals("") ||
+                phoneNumberField.getText().equals("")){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     private boolean isPhoneNumber (){
         String phoneNumber =  phoneNumberField.getText();
         boolean is = true;
@@ -78,15 +81,9 @@ public class SignUpController {
         return is;
     }
 
-    private boolean isFieldEmpty(){
-        if (usernameField.getText().equals("") || passwordField.getText().equals("") || phoneNumberField.getText().equals("") ||
-        cityField.getText().equals("")){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-
 }
+
+
+
+
+

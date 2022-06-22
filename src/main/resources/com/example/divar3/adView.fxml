@@ -7,7 +7,7 @@
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.AdViewController">
    <content>
-      <GridPane fx:id="grid" alignment="CENTER_RIGHT" prefHeight="106.0" prefWidth="605.0">
+      <GridPane fx:id="grid" alignment="CENTER_RIGHT" prefHeight="106.0" prefWidth="605.0" style="-fx-background-color: &quot;314A82&quot;;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="299.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="299.0" />
