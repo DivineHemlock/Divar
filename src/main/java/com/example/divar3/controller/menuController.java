@@ -1,42 +1,49 @@
 package com.example.divar3.controller;
 
+import com.example.divar3.HelloController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class menuController {
 
-    //private User user; + setter;
+    @FXML
+    private TextField maxField;
 
     @FXML
-    private ChoiceBox<String> citiesChoicebox;
+    private TextField minField;
 
     @FXML
-    private TextField fromTextField;
-
-    @FXML
-    private TextField toTextField;
+    private Button moreButton;
 
     @FXML
     private TextField searchTextfield;
 
     @FXML
-    void profileButtonClicked(ActionEvent event) {
+    private ChoiceBox<String> tagChoiceBox;
 
+    public void initialize() throws IOException {
+        setTagChoiceBox();
     }
 
     @FXML
     void createAdCliclked(ActionEvent event) throws IOException {
         PageController.close();
-        FXMLLoader loader = PageController.open("createAd");
-        // setters
+        PageController.open("createAd");
+    }
+
+    @FXML
+    void profileButtonClicked(ActionEvent event) {
+
     }
 
     @FXML
@@ -47,15 +54,41 @@ public class menuController {
 
     @FXML
     void searchClicked(ActionEvent event) {
-        String from = fromTextField.getText();
-        String to = toTextField.getText();
-        String search = searchTextfield.getText();
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("a");
-        arrayList.add("b");
-        ObservableList<String> observableList = FXCollections.observableArrayList(arrayList);
-        citiesChoicebox.setItems(observableList);
 
     }
+
+    @FXML
+    void moreClicked(ActionEvent event) {
+        if (!maxField.visibleProperty().getValue()){
+            maxField.setVisible(true);
+            minField.setVisible(true);
+            tagChoiceBox.setVisible(true);
+        }
+        else {
+            emptyMore();
+            maxField.setVisible(false);
+            minField.setVisible(false);
+            tagChoiceBox.setVisible(false);
+        }
+    }
+
+    //empty nods that appear when more is shown
+    public void emptyMore(){
+        maxField.setText("");
+        minField.setText("");
+        tagChoiceBox.setValue("");
+    }
+
+    private void setTagChoiceBox () throws IOException {
+        File file = new File(HelloController.class.getResource("tags.txt").getFile());
+        Scanner reader = new Scanner(file);
+        ArrayList<String> cities = new ArrayList<>();
+        while (reader.hasNextLine()){
+            cities.add(reader.nextLine());
+        }
+        ObservableList<String> observableList = FXCollections.observableArrayList(cities);
+        tagChoiceBox.setItems(observableList);
+    }
+
 
 }

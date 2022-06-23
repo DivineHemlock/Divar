@@ -40,17 +40,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.SignUpController">
    <children>
       <ImageView fitHeight="24.0" fitWidth="29.0" layoutX="412.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@username-icon-3.png" />
+            <Image url="@whiteUserIcon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="414.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@207-2073115_font-password-comments-password-icon-png-transparent.png" />
+            <Image url="@whitePasswordIcon.png" />
          </image>
       </ImageView>
       <TextField fx:id="usernameField" layoutX="258.0" layoutY="111.0" promptText="username" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
@@ -61,19 +62,25 @@
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="411.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@home-icon-images-22.png" />
+            <Image url="@whiteHomeIcon.png" />
          </image>
       </ImageView>
       <PasswordField fx:id="passwordField" layoutX="258.0" layoutY="144.0" promptText="password" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
       <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="411.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@free-phone-icon-14-thumb.png" />
+            <Image url="@whitePhoneIcon.png" />
          </image>
       </ImageView>
       <TextField fx:id="phoneNumberField" layoutX="258.0" layoutY="176.0" promptText="phone number" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
       <Button layoutX="345.0" layoutY="251.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;" text="sign up" textFill="WHITE" />
-      <Label fx:id="incorrectNumber" layoutX="247.0" layoutY="229.0" prefHeight="24.0" prefWidth="198.0" text="phone number is incorrect" textFill="RED" visible="false" />
-      <Label layoutX="240.0" layoutY="229.0" prefHeight="24.0" prefWidth="198.0" text="username allready exist" textFill="RED" visible="false" />
+      <Label fx:id="incorrectNumber" layoutX="247.0" layoutY="291.0" prefHeight="24.0" prefWidth="165.0" text="phone number is incorrect" textFill="RED" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="usernameError" disable="true" layoutX="237.0" layoutY="291.0" prefHeight="24.0" prefWidth="198.0" text="username allready exist" textFill="RED" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Button layoutX="244.0" layoutY="250.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="log in" textFill="WHITE" />
       <ChoiceBox fx:id="cityChoiceBox" layoutX="258.0" layoutY="211.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
    </children>

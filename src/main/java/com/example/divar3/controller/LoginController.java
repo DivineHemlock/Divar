@@ -52,8 +52,12 @@ public class LoginController {
     @FXML
     void signUpClicked(ActionEvent event) throws IOException {
         PageController.close();
-        FXMLLoader loader = PageController.open("signUp");
-        //setter
+        try {
+            FXMLLoader loader = PageController.open("signUp");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
     }
 

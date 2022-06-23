@@ -46,12 +46,12 @@
       <PasswordField fx:id="passwordField" layoutX="246.0" layoutY="193.0" promptText="password" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
       <ImageView fitHeight="24.0" fitWidth="29.0" layoutX="400.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@username-icon-3.png" />
+            <Image url="@whiteUserIcon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="400.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@207-2073115_font-password-comments-password-icon-png-transparent.png" />
+            <Image url="@whitePasswordIcon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="235.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">

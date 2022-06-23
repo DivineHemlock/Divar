@@ -1,81 +1,97 @@
 package com.example.divar3.controller;
 
+import com.example.divar3.HelloController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class CreateAdController {
 
+    private File image;
     @FXML
-    private TextArea detailsField;
+    private ImageView adImageField;
+
+    @FXML
+    private TextField detailsTextField;
 
     @FXML
     private Label invalidPriceLabel;
 
     @FXML
-    private TextField priceField;
+    private TextField priceTextField;
 
     @FXML
-    private ChoiceBox<?> tagChoiceBox;
+    private ChoiceBox<String> tagChoiceBox;
 
     @FXML
-    private TextField titleField;
+    private TextField titleTextField;
+
+    public void initialize() throws IOException {
+        setTagChoiceBox();
+        //File file =
+    }
 
     @FXML
-    void createAdCliclked(ActionEvent event) {
-        invisibleErrors();
-        if (isEmpty()){
-            return;
-        }
-        if (!isPriceValid()){
-            invalidPriceLabel.setVisible(true);
-            return;
-        }
-        String price = priceField.getText();
-        String title = titleField.getText();
-        String details = detailsField.getText();
-        System.out.println(price + " " + title + " " + details);
+    void createAdClicked(ActionEvent event) {
 
     }
 
-    //function below checks if fields are empty *** need to add for choice box
-    private boolean isEmpty(){
-        boolean is = false;
-        if (priceField.getText().equals("") || titleField.getText().equals("")){
-            is = true;
-        }
-        return is;
-    }
-
-    // remember to add a value for checking 2 digits
-    private boolean isPriceValid (){
-        boolean is = true;
+    @FXML
+    void insertPictureClicked(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        Stage stage = new Stage();
         try {
-            Double num = Double.parseDouble(priceField.getText());
+            File file = fileChooser.showOpenDialog(stage);
+            Image image = new Image(file.getAbsolutePath());
+            adImageField.setImage(image);
+            setImage(file);
         }
         catch (Exception exception){
-            is = false;
+            System.out.println("unknown image");
         }
-        return is;
+
     }
 
-    // function below set errors invisible
-    private void invisibleErrors(){
-        invalidPriceLabel.setVisible(false);
+    @FXML
+    void profileButtonClicked(ActionEvent event) {
+
     }
 
     @FXML
     void returnClicked(ActionEvent event) throws IOException {
         PageController.close();
-        FXMLLoader loader = PageController.open("menu");
-        // set user name
+        PageController.open("menu");
     }
 
+    private void setImage(File image) {
+        this.image = image;
+    }
+
+    private File getImage(){
+        return this.image;
+    }
+
+    private void setTagChoiceBox () throws IOException {
+        File file = new File(HelloController.class.getResource("tags.txt").getFile());
+        Scanner reader = new Scanner(file);
+        ArrayList<String> cities = new ArrayList<>();
+        while (reader.hasNextLine()){
+            cities.add(reader.nextLine());
+        }
+        ObservableList<String> observableList = FXCollections.observableArrayList(cities);
+        tagChoiceBox.setItems(observableList);
+    }
 }
