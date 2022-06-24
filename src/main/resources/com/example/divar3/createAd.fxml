@@ -45,6 +45,6 @@
             <Image url="@shopping-cart-with-food-design-flat-food-and-shopping-cart-icon-shopping-HEH535.jpg" />
          </image>
       </ImageView>
-      <TextArea blendMode="OVERLAY" layoutX="47.0" layoutY="60.0" prefHeight="203.0" prefWidth="194.0" promptText="Details" />
+      <TextArea fx:id="detailsTextField" blendMode="OVERLAY" layoutX="47.0" layoutY="60.0" prefHeight="203.0" prefWidth="194.0" promptText="Details" />
    </children>
 </AnchorPane>

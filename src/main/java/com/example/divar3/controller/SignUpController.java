@@ -9,6 +9,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,8 +26,13 @@ import java.util.Scanner;
 public class SignUpController {
 
 
+    private File image;
     @FXML
     private Label incorrectNumber;
+
+    @FXML
+    private ImageView profileImage;
+
 
     @FXML
     private PasswordField passwordField;
@@ -74,9 +83,14 @@ public class SignUpController {
 
     //this function returns yes if any field is empty
     private boolean isFieldEmpty(){
-        String s = cityChoiceBox.getValue();
+        try {
+            cityChoiceBox.getValue().equals("");
+        }
+        catch (Exception e){
+            return true;
+        }
         if (usernameField.getText().equals("") || passwordField.getText().equals("") ||
-                phoneNumberField.getText().equals("") || s.equals("")){
+                phoneNumberField.getText().equals("")){
             return true;
         }
         else {
@@ -113,6 +127,26 @@ public class SignUpController {
         }
         ObservableList<String> observableList = FXCollections.observableArrayList(cities);
         cityChoiceBox.setItems(observableList);
+    }
+
+    @FXML
+    void insertPictureClicked(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        Stage stage = new Stage();
+        try {
+            File file = fileChooser.showOpenDialog(stage);
+            Image image = new Image(file.getAbsolutePath());
+            profileImage.setImage(image);
+            setImage(file);
+        }
+        catch (Exception exception){
+            System.out.println("unknown image");
+        }
+
+    }
+
+    private void setImage(File image) {
+        this.image = image;
     }
 
 }

@@ -1,14 +1,17 @@
 package com.example.divar3.controller;
 
+import com.example.divar3.HelloController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.File;
 import java.io.IOException;
 
 public class AdPageController {
@@ -40,7 +43,8 @@ public class AdPageController {
 
     @FXML
     public void initialize(){
-        detailsField.setText("ssssss \n lllll");
+        File file = new File(HelloController.class.getResource("ad/ad.jpg").getFile());
+        adImage.setImage(new Image(file.getAbsolutePath()));
     }
     @FXML
     void chatClicked(ActionEvent event) {

@@ -29,7 +29,7 @@ public class CreateAdController {
     private Label invalidPriceLabel;
 
     @FXML
-    private TextArea derailsField;
+    private TextArea detailsTextField;
 
 
     @FXML
@@ -53,6 +53,7 @@ public class CreateAdController {
         }
         else if (!isPriceValid()){
             invalidPriceLabel.setVisible(true);
+            return;
         }
     }
 
@@ -103,10 +104,14 @@ public class CreateAdController {
     }
 
     private boolean areFieldsEmpty(){
-        if (tagChoiceBox.equals(null)){
+        try {
+            tagChoiceBox.getValue().equals("");
+        }
+        catch (Exception e){
             return true;
         }
-        if(tagChoiceBox.getValue().equals("") || derailsField.getText().equals("")
+        System.out.println(detailsTextField.getText());
+        if(detailsTextField.getText().equals("")
         || priceTextField.getText().equals("")|| titleTextField.getText().equals("")){
             return true;
         }

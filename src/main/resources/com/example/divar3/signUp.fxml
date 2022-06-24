@@ -83,5 +83,11 @@
          </font></Label>
       <Button layoutX="244.0" layoutY="250.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="log in" textFill="WHITE" />
       <ChoiceBox fx:id="cityChoiceBox" layoutX="258.0" layoutY="211.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <Button layoutX="135.0" layoutY="251.0" mnemonicParsing="false" onAction="#insertPictureClicked" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: &quot;10e8e8&quot;; -fx-background-radius: 100;" text="Insert Picture" textFill="WHITE" />
+      <ImageView fx:id="profileImage" fitHeight="112.0" fitWidth="121.0" layoutX="123.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@User_icon_2.svg.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

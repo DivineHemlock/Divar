@@ -25,7 +25,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = PageController.open("signUp");
+        FXMLLoader loader = PageController.open("adPage");
         //AdViewController adViewController = loader.getController();
         //adViewController.addButton();
         //AdViewController adViewController = loader.getController();
