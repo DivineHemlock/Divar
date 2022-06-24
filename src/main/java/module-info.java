@@ -10,6 +10,8 @@ module com.example.divar3 {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires org.mongodb.driver.core;
+    requires org.mongodb.bson;
 
     opens com.example.divar3.controller to javafx.fxml;
     exports com.example.divar3;
