@@ -1,10 +1,12 @@
 package DB;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AD
 {
+    private Calendar calendar = Calendar.getInstance();
     public static int counter = 0;
     private String name;
     private String pictureName;
@@ -23,8 +25,10 @@ public class AD
         this.city = city;
         this.price = price;
         this.user = user;
-        //this.submitDate = new Date();
-        //this.expirationDate =
+        this.submitDate = calendar.getTime();
+        calendar.add(Calendar.DATE , 10);
+        this.expirationDate = calendar.getTime();
+        calendar.add(Calendar.DATE , -10);
         this.info = info;
         this.ID = String.valueOf(counter);
         this.pictureName = ID;

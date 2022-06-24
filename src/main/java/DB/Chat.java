@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class Chat
 {
-    private User user_a;
-    private User user_b;
+    public static int counter = 0;
+    private String userAUsername;
+    private String userBUsername;
+    private String ID;
     private ArrayList<Message> messages = new ArrayList<>();
 
-    public Chat(User user_a, User user_b) {
-        this.user_a = user_a;
-        this.user_b = user_b;
+    public Chat(String user_a, String user_b) {
+        this.userAUsername = user_a;
+        this.userBUsername = user_b;
+        this.ID = String.valueOf(Chat.counter);
         this.messages = new ArrayList<>();
+        Chat.counter += 1;
     }
 
     public void addMessage (Message message)
@@ -19,20 +23,20 @@ public class Chat
         this.messages.add(message);
     }
 
-    public User getUser_a() {
-        return user_a;
+    public String getUserAUsername() {
+        return userAUsername;
     }
 
-    public void setUser_a(User user_a) {
-        this.user_a = user_a;
+    public void setUserAUsername(String userAUsername) {
+        this.userAUsername = userAUsername;
     }
 
-    public User getUser_b() {
-        return user_b;
+    public String getUserBUsername() {
+        return userBUsername;
     }
 
-    public void setUser_b(User user_b) {
-        this.user_b = user_b;
+    public void setUserBUsername(String userBUsername) {
+        this.userBUsername = userBUsername;
     }
 
     public ArrayList<Message> getMessages() {

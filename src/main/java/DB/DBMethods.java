@@ -8,6 +8,7 @@ import com.mongodb.client.model.Updates;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DBMethods
 {
@@ -252,7 +253,59 @@ public class DBMethods
     //********************************************** CHAT METHODS ******************************************
     //******************************************************************************************************
 
-    //public static boolean makeNewChat
+    public static boolean addChat (Chat chat)
+    {
+        DBHandler handler = new DBHandler();
+        Document doc = new Document();
+        doc = Document.parse(new Gson().toJson(chat));
+        handler.getMainDB().getCollection("chats").insertOne(doc);
+        handler.getMongoClient().close();
+        return true;
+    }
 
+    public static boolean updateChatWithNewMessage (Chat chat , Message message)
+    {
+        DBHandler handler = new DBHandler();
+        handler.getMainDB().getCollection("chats").deleteOne(Objects.requireNonNull(findChatByTwoUsernames(chat.getUserAUsername(), chat.getUserBUsername()))); // delete the old chat from the DB
+        chat.addMessage(message); // update the chat with the new message
+        addChat(chat); // add the new chat to DB
+        handler.getMongoClient().close();
+        return true;
+    }
 
+    public static Document findChatByTwoUsernames (String username_a , String username_b)
+    {
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < Chat.counter ; i++)
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID" ,iAsString);
+            Document chat = handler.getMainDB().getCollection("chats").find(testDoc).cursor().next();
+            if (chat.get("userAUsername").toString().equals(username_a) && chat.get("userBUsername").toString().equals(username_b))
+            {
+                Document ans = handler.getMainDB().getCollection("chats").find(testDoc).cursor().next();
+                handler.getMongoClient().close();
+                return ans;
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<Document> findChatByOneUsername (String username)
+    {
+        ArrayList<Document> ans = new ArrayList<>();
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < Chat.counter ; i++)
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID" , iAsString);
+            Document chat = handler.getMainDB().getCollection("chats").find(testDoc).cursor().next();
+            if (chat.get("userAUsername").toString().equals(username) || chat.get("userBUsername").toString().equals(username))
+            {
+                ans.add(chat);
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
 }
