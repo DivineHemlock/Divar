@@ -39,9 +39,9 @@ public class Test
         System.out.println(DBMethods.makeNewAD(ad5));
         System.out.println(DBMethods.makeNewAD(ad6));
         System.out.println(DBMethods.makeNewAD(ad7));*/
-        Message message = new Message("salam khobi?" , User.makeUserObjectWithJson(DBMethods.findUserInDB("a")) , User.makeUserObjectWithJson(DBMethods.findUserInDB("john")));
-        Message message1 = new Message("salam , mersi" , User.makeUserObjectWithJson(DBMethods.findUserInDB("john")) , User.makeUserObjectWithJson(DBMethods.findUserInDB("a")));
-        Message message2 = new Message("yoyoyoyoyo" , User.makeUserObjectWithJson(DBMethods.findUserInDB("alireza")) , User.makeUserObjectWithJson(DBMethods.findUserInDB("a")));
+        Message message = new Message("salam khobi?" , "a" , "john");
+        Message message1 = new Message("salam , mersi" , "john" , "a");
+        Message message2 = new Message("yoyoyoyoyo" , "a" , "alireza");
         Chat chat = new Chat("a" , "john");
         Chat chat1 = new Chat("a" , "alireza");
         chat1.addMessage(message2);
