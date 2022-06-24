@@ -1,15 +1,23 @@
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Server {
+    private ArrayList<ClientHandler> clients;
+
     public static void main(String[] args) {
         ServerSocket server = null;
         try{
-            server = new ServerSocket(32000);
+            server = new ServerSocket(32001);
             server.setReuseAddress(true);
             while (true){
                 Socket client = server.accept();
@@ -37,21 +45,40 @@ public class Server {
 
         public ClientHandler(Socket socket){
             this.clientSocket = socket;
+
         }
 
         @Override
         public void run() {
+            Scanner scanner = new Scanner(System.in);
             PrintWriter out = null;
             BufferedReader in = null;
             try {
                 out = new PrintWriter(clientSocket.getOutputStream(), true);
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                String line;
-                while ((line = in.readLine()) != null){
-                    System.out.printf("Sent from the client: %s\n", line);
-                    out.println(line + "mmmmm");
+
+                JSONParser parser = new JSONParser();
+
+                String requestJson;
+
+                while ((requestJson = in.readLine()) != null){
+
+                    JSONObject json = (JSONObject) parser.parse(requestJson);
+                    JSONObject userPass = (JSONObject) parser.parse((String) json.get("data"));
+
+                    if (json.get("id").equals("LOGIN")){
+                        loginPageSearchStuff((String) userPass.get("username"), (String) userPass.get("password"));
+
+                        System.out.println(json.get("id"));
+                        System.out.println(userPass.get("username"));
+                        System.out.println(userPass.get("password"));
+
+                        out.println("more data from username: " + userPass.get("username") + " and password " + userPass.get("password"));
+                        out.flush();
+                    }
+
                 }
-            } catch (IOException e) {
+            } catch (IOException | ParseException e) {
                 e.printStackTrace();
             } finally {
                 try{
@@ -66,6 +93,10 @@ public class Server {
                 }
             }
         }
+    }
+
+    public static void loginPageSearchStuff(String username, String password){
+        // Searching methods
     }
 }
 
