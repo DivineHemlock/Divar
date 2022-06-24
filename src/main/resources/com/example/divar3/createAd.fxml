@@ -24,7 +24,7 @@
       </Button>
       <TextField fx:id="priceTextField" layoutX="301.0" layoutY="111.0" prefHeight="25.0" prefWidth="194.0" promptText="Price" style="-fx-background-color: &quot;C1D3FC&quot;; -fx-background-radius: 100;" />
       <ChoiceBox fx:id="tagChoiceBox" layoutX="301.0" layoutY="159.0" prefHeight="25.0" prefWidth="194.0" style="-fx-background-color: &quot;C1D3FC&quot;; -fx-background-radius: 100;" />
-      <Label fx:id="invalidPriceLabel" alignment="CENTER" layoutX="301.0" layoutY="286.0" style="&#10;" text="Invalid price" textAlignment="CENTER" textFill="RED" visible="false" wrapText="false">
+      <Label fx:id="invalidPriceLabel" alignment="CENTER" layoutX="99.0" layoutY="286.0" style="&#10;" text="Invalid price" textAlignment="CENTER" textFill="RED" visible="false" wrapText="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -45,6 +45,6 @@
             <Image url="@shopping-cart-with-food-design-flat-food-and-shopping-cart-icon-shopping-HEH535.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="derailsField" blendMode="OVERLAY" layoutX="47.0" layoutY="60.0" prefHeight="203.0" prefWidth="194.0" promptText="Details" />
+      <TextArea blendMode="OVERLAY" layoutX="47.0" layoutY="60.0" prefHeight="203.0" prefWidth="194.0" promptText="Details" />
    </children>
 </AnchorPane>

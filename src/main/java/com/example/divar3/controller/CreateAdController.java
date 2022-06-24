@@ -43,12 +43,17 @@ public class CreateAdController {
 
     public void initialize() throws IOException {
         setTagChoiceBox();
-        derailsField.setText("ssssssss\n");
     }
 
     @FXML
     void createAdClicked(ActionEvent event) {
-
+        invalidPriceLabel.setVisible(false);
+        if (areFieldsEmpty()){
+            return;
+        }
+        else if (!isPriceValid()){
+            invalidPriceLabel.setVisible(true);
+        }
     }
 
     @FXML
@@ -95,5 +100,30 @@ public class CreateAdController {
         }
         ObservableList<String> observableList = FXCollections.observableArrayList(cities);
         tagChoiceBox.setItems(observableList);
+    }
+
+    private boolean areFieldsEmpty(){
+        if (tagChoiceBox.equals(null)){
+            return true;
+        }
+        if(tagChoiceBox.getValue().equals("") || derailsField.getText().equals("")
+        || priceTextField.getText().equals("")|| titleTextField.getText().equals("")){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    private boolean isPriceValid (){
+        String price = priceTextField.getText();
+        try {
+            double num = Double.parseDouble(price);
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
     }
 }

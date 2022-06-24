@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -9,57 +11,83 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.AdPageController">
    <children>
-      <Line endX="497.0" layoutX="101.0" layoutY="220.0" startX="-100.0" />
-      <Line endX="-93.5" endY="166.0" layoutX="427.0" layoutY="53.0" startX="-93.5" startY="-49.0" />
-      <ImageView fitHeight="202.0" fitWidth="318.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
-      <Line endX="497.0" layoutX="109.0" layoutY="74.0" startX="224.5" />
-      <Line endX="497.0" layoutX="109.0" layoutY="150.0" startX="224.5" />
-      <Label layoutX="404.0" layoutY="14.0" prefHeight="53.0" prefWidth="131.0" text="ssssss">
+      <ImageView fx:id="adImage" fitHeight="142.0" fitWidth="261.0" layoutX="8.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@shopping-cart-with-food-design-flat-food-and-shopping-cart-icon-shopping-HEH535.jpg" />
+         </image></ImageView>
+      <TextArea fx:id="detailsField" blendMode="SRC_ATOP" disable="true" layoutX="14.0" layoutY="228.0" prefHeight="128.0" prefWidth="558.0" text="text goes here&#10;">
          <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="339.0" layoutY="86.0" prefHeight="53.0" prefWidth="75.0" text="price:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="481.0" layoutY="85.0" prefHeight="53.0" prefWidth="105.0" text="555$">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="339.0" layoutY="160.0" prefHeight="53.0" prefWidth="75.0" text="date:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="455.0" layoutY="160.0" prefHeight="53.0" prefWidth="131.0" text="2022/06/04">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TextArea layoutX="14.0" layoutY="228.0" prefHeight="128.0" prefWidth="558.0" text="text goes here&#10;" />
-      <Button layoutX="535.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;2196f3&quot;;">
+            <Font size="13.0" />
+         </font></TextArea>
+      <Button layoutX="526.0" layoutY="361.0" mnemonicParsing="false" onAction="#returnClicked" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="80.0" onDragDetected="#returnClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@390-3902765_return-button-return-button-image-png-transparent-png.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="277.0" layoutY="358.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;4caf50&quot;;">
+      <Button layoutX="22.0" layoutY="361.0" mnemonicParsing="false" onAction="#chatClicked" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" onDragDetected="#returnClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="119.0" onDragDetected="#returnClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@chatWhite.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
+      <Line endX="170.5" endY="1.52587890625E-5" layoutX="105.0" layoutY="169.0" startX="-100.0" />
+      <Line endX="-99.79290771484375" endY="117.00001525878906" layoutX="376.0" layoutY="52.0" startX="-100.0" startY="-50.66666030883789" />
+      <Label alignment="CENTER" layoutX="323.0" layoutY="57.0" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="Date" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="323.0" layoutY="97.0" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: &quot;4fefec&quot;; -fx-background-radius: 20;" text="Price" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Line endX="-99.79290771484375" endY="117.00001525878906" layoutX="378.0" layoutY="14.0" startX="222.0" startY="117.00001525878906" />
+      <Line endX="-99.79290771484375" endY="117.00001525878906" layoutX="376.0" layoutY="-26.0" startX="222.0" startY="117.00001525878906" />
+      <Line endX="-99.79290771484375" endY="117.00001525878906" layoutX="380.0" layoutY="-69.0" startX="228.16668701171875" startY="117.00001525878906" />
+      <Line endX="-99.79290771484375" endY="117.00001525878906" layoutX="377.0" layoutY="53.0" startX="222.0" startY="117.00001525878906" />
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="319.0" layoutY="13.0" prefHeight="28.0" prefWidth="241.0" style="-fx-background-color: e8ea4b; -fx-background-radius: 20;" text="Title" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateLabel" alignment="CENTER" layoutX="418.0" layoutY="57.0" prefHeight="28.0" prefWidth="167.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="Date" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="priceLabel" alignment="CENTER" layoutX="418.0" layoutY="97.0" prefHeight="28.0" prefWidth="167.0" style="-fx-background-color: &quot;4fefec&quot;; -fx-background-radius: 20;" text="price" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="326.0" layoutY="139.0" mnemonicParsing="false" onAction="#phoneNumberClicked" prefHeight="20.0" prefWidth="37.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@whitePhoneIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="phoneNumberLabel" alignment="CENTER" layoutX="418.0" layoutY="137.0" prefHeight="28.0" prefWidth="167.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;" text="Phone Number" textFill="WHITE" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="bookmark" layoutX="31.0" layoutY="184.0" mnemonicParsing="false" onAction="#bookmarkClicked" prefHeight="24.0" prefWidth="85.0" style="-fx-background-color: &quot;f04024&quot;; -fx-background-radius: 20;" text="Bookmark" textFill="WHITE">
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </CheckBox>
    </children>
 </AnchorPane>

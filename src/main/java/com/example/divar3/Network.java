@@ -4,10 +4,17 @@ import java.io.*;
 import java.net.Socket;
 
 public class Network {
+    Socket socket;
+    FileOutputStream fileOutputStream;
+    FileInputStream fileInputStream;
+
+    public Network(){
+        //Socket = new Socket();
+        //f//ileInputStream = new
+    }
+
+
     public static void sendData(String s) throws IOException {
 
-        Socket socket = new Socket("127.0.0.1", 8889);
-        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-        dataOutputStream.writeUTF(s);
     }
 }
