@@ -25,7 +25,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = PageController.open("menu");
+        FXMLLoader loader = PageController.open("chatBox");
         //AdViewController adViewController = loader.getController();
         //adViewController.addButton();
         //AdViewController adViewController = loader.getController();

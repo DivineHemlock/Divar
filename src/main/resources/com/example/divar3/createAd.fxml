@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -28,11 +29,10 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="detailsTextField" alignment="TOP_LEFT" layoutX="61.0" layoutY="59.0" prefHeight="255.0" prefWidth="218.0" promptText="Details" style="-fx-background-color: &quot;C1D3FC&quot;; -fx-background-radius: 20;" />
       <TextField fx:id="titleTextField" layoutX="301.0" layoutY="64.0" prefHeight="25.0" prefWidth="194.0" promptText="Title" style="-fx-background-color: &quot;C1D3FC&quot;; -fx-background-radius: 100;" />
       <Button layoutX="525.0" layoutY="9.0" mnemonicParsing="false" onAction="#profileButtonClicked" prefHeight="51.0" prefWidth="59.0" style="-fx-background-radius: 50%; -fx-border-radius: 50%; -fx-border-color: &quot;ffffff&quot;;">
          <graphic>
-            <ImageView fx:id="profileClicked" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@userIcon2.png" />
                </image>
@@ -45,5 +45,6 @@
             <Image url="@shopping-cart-with-food-design-flat-food-and-shopping-cart-icon-shopping-HEH535.jpg" />
          </image>
       </ImageView>
+      <TextArea fx:id="derailsField" blendMode="OVERLAY" layoutX="47.0" layoutY="60.0" prefHeight="203.0" prefWidth="194.0" promptText="Details" />
    </children>
 </AnchorPane>
