@@ -244,6 +244,25 @@ public class DBMethods
         return ans;
     }
 
+    public static ArrayList<Document> findAdByText (String text)
+    {
+        ArrayList<Document> ans = new ArrayList<>();
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID" , iAsString);
+            boolean flag = handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("info").toString().contains(text);
+            boolean flag_1 = handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("name").toString().contains(text);
+            if (flag || flag_1)
+            {
+                ans.add(handler.getMainDB().getCollection("ads").find(testDoc).cursor().next());
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
+
 
     //******************************************************************************************************
     //********************************************** AD METHODS ********************************************
