@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.text.Font?>
+
+<Hyperlink fx:id="hyperLink" onAction="#hyperLinkClicked" prefHeight="13.0" prefWidth="259.0" style="-fx-background-color: &quot;33ff93&quot;;" text="AD" textFill="WHITE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.HyperLinkController">
+   <font>
+      <Font size="16.0" />
+   </font>
+</Hyperlink>
