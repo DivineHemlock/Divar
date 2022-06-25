@@ -11,7 +11,7 @@ import org.json.simple.parser.ParseException;
 
 public class Client {
     String host = "127.0.0.1";
-    int port = 32002;
+    int port = 32003;
 
     PrintWriter out;
     BufferedReader in;
@@ -49,7 +49,7 @@ public class Client {
 //                        System.out.println(response);
                         switch (JsonToClassResponse.getId()){
                             case "SC Login" -> {
-
+                                System.out.println("Successful Login");
                             }
                             case "Fail Login" -> {
 

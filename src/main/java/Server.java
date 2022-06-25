@@ -3,27 +3,29 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Server {
-    private ArrayList<ClientHandler> clients;
+    static PrintWriter out;
+    static BufferedReader in;
+    private static HashMap<String, PrintWriter> loginInfos = new HashMap<>();
+    static Socket socket;
 
     public static void main(String[] args) {
         ServerSocket server = null;
         try{
-            server = new ServerSocket(32002);
+            server = new ServerSocket(32003);
             server.setReuseAddress(true);
             while (true){
-                Socket client = server.accept();
+                socket = server.accept();
                 System.out.println("New client connected");
-                ClientHandler clientSock = new ClientHandler(client);
+                ClientHandler clientSock = new ClientHandler(socket);
 
                 new Thread(clientSock).start();
             }
@@ -43,8 +45,6 @@ public class Server {
     private static class ClientHandler implements Runnable{
 
         private final Socket clientSocket;
-        PrintWriter out;
-        BufferedReader in;
 
         public ClientHandler(Socket socket){
             this.clientSocket = socket;
@@ -70,10 +70,15 @@ public class Server {
 
                     switch (id){
                         case "Login" -> {
-                            Request response = responseLogin(data);
+                            Request response = responseLogin(data, out);
                             String responseJson = gson.toJson(response);
+                            System.out.println(loginInfos.get("ali").getClass());
                             out.println(responseJson);
                             out.flush();
+                        }
+                        case "Send File" -> {
+                            File file = new File("url");
+                            sendFile(file);
                         }
                     }
                 }
@@ -98,20 +103,47 @@ public class Server {
         // Searching methods
     }
 
-    public static Request responseLogin(String data){
+    public static Request responseLogin(String data, PrintWriter out){
         Gson gson = new Gson();
         JSONObject userPass = gson.fromJson(data, JSONObject.class);
+        System.out.println(userPass);
 
         Request response = new Request();
         response.setData("more data");
 
         if (userPass.get("username").equals("ali")){
             response.setId("SC Login");
+            loginInfos.put((String) userPass.get("username"), out);
+
         } else{
             response.setId("Fail Login");
         }
 
         return response;
+    }
+
+    public static void getFile(File file) throws IOException {
+        InputStream inputStream = socket.getInputStream();
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        byte[] buffer = new byte[1024];
+        while (inputStream.read(buffer) > 0){
+            fileOutputStream.write(buffer);
+            System.out.println(Arrays.toString(buffer));
+        }
+        fileOutputStream.close();
+        inputStream.close();
+    }
+
+    public static void sendFile(File file) throws IOException {
+        OutputStream outputStream = socket.getOutputStream();
+        FileInputStream fileInputStream = new FileInputStream(file);
+        byte[] buffer = new byte[1024];
+        while (fileInputStream.read(buffer) > 0){
+            outputStream.write(buffer);
+            outputStream.flush();
+        }
+        outputStream.close();
+        fileInputStream.close();
     }
 }
 
