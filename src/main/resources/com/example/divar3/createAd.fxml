@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.CreateAdController">
+   <children>
+      <Button layoutX="51.0" layoutY="345.0" mnemonicParsing="false" onAction="#createAdClicked" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 100;" text="Create ad" textFill="WHITE" />
+      <Button layoutX="521.0" layoutY="344.0" mnemonicParsing="false" onAction="#returnClicked" prefHeight="28.0" prefWidth="67.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 100;">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@390-3902765_return-button-return-button-image-png-transparent-png.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="priceTextField" layoutX="301.0" layoutY="111.0" prefHeight="25.0" prefWidth="194.0" promptText="Price" style="-fx-background-color: &quot;C1D3FC&quot;; -fx-background-radius: 100;" />
+      <ChoiceBox fx:id="tagChoiceBox" layoutX="301.0" layoutY="159.0" prefHeight="25.0" prefWidth="194.0" style="-fx-background-color: &quot;C1D3FC&quot;; -fx-background-radius: 100;" />
+      <Label fx:id="invalidPriceLabel" alignment="CENTER" layoutX="99.0" layoutY="286.0" style="&#10;" text="Invalid price" textAlignment="CENTER" textFill="RED" visible="false" wrapText="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="titleTextField" layoutX="301.0" layoutY="64.0" prefHeight="25.0" prefWidth="194.0" promptText="Title" style="-fx-background-color: &quot;C1D3FC&quot;; -fx-background-radius: 100;" />
+      <Button layoutX="525.0" layoutY="9.0" mnemonicParsing="false" onAction="#profileButtonClicked" prefHeight="51.0" prefWidth="59.0" style="-fx-background-radius: 50%; -fx-border-radius: 50%; -fx-border-color: &quot;ffffff&quot;;">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@userIcon2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="144.0" layoutY="344.0" mnemonicParsing="false" onAction="#insertPictureClicked" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: &quot;10e8e8&quot;; -fx-background-radius: 100;" text="Insert Picture" textFill="WHITE" />
+      <ImageView fx:id="adImageField" fitHeight="112.0" fitWidth="121.0" layoutX="301.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@shopping-cart-with-food-design-flat-food-and-shopping-cart-icon-shopping-HEH535.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="detailsTextField" blendMode="OVERLAY" layoutX="47.0" layoutY="60.0" prefHeight="203.0" prefWidth="194.0" promptText="Details" />
+   </children>
+</AnchorPane>

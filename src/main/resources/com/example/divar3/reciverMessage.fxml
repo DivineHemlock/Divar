@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+
+
+<Label prefHeight="17.0" prefWidth="53.0" style="-fx-background-color: &quot;e2e9e8&quot;;" text="sssssssssssssssssssssssssssssssssssssssssssssss" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" />
