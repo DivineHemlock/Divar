@@ -17,7 +17,7 @@ public class Server {
     public static void main(String[] args) {
         ServerSocket server = null;
         try{
-            server = new ServerSocket(32001);
+            server = new ServerSocket(32002);
             server.setReuseAddress(true);
             while (true){
                 Socket client = server.accept();
