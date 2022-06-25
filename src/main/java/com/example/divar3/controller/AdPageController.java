@@ -1,5 +1,7 @@
 package com.example.divar3.controller;
 
+import DB.AD;
+import com.example.divar3.ADHolder;
 import com.example.divar3.HelloController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +47,11 @@ public class AdPageController {
     public void initialize(){
         File file = new File(HelloController.class.getResource("ad/ad.jpg").getFile());
         adImage.setImage(new Image(file.getAbsolutePath()));
+        AD ad = ADHolder.getAd();
+        dateLabel.setText(ad.getSubmitDate().toString());
+        priceLabel.setText(ad.getPrice());
+        titleLabel.setText(ad.getName());
+        detailsField.setText(ad.getInfo());
     }
     @FXML
     void chatClicked(ActionEvent event) {
