@@ -21,32 +21,28 @@ public class Client {
         socket = new Socket(host, port);
         this.out = new PrintWriter(socket.getOutputStream(), true);;
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        listenForMessage();
     }
 
     public void sendRequest(Request request) throws IOException, ParseException {
         Gson gson = new Gson();
 
-        JSONObject rq = new JSONObject();
-
         String jsonRequest = gson.toJson(request);
 
         out.println(jsonRequest);
         out.flush();
-
-        String response = in.readLine(); // json
-        System.out.println("Server replied " + response);
     }
 
     public void listenForMessage() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String msgFromGroupChat;
+                String response;
 
                 while (socket.isConnected()) {
                     try {
-                        msgFromGroupChat = in.readLine();
-                        System.out.println(msgFromGroupChat);
+                        response = in.readLine();
+                        System.out.println(response);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
