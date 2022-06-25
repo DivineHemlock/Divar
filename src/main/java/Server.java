@@ -66,7 +66,7 @@ public class Server {
                     JSONObject json = (JSONObject) parser.parse(requestJson);
                     JSONObject userPass = (JSONObject) parser.parse((String) json.get("data"));
 
-                    if (json.get("id").equals("LOGIN")){
+                    if (json.get("id").equals("Login")){
                         loginPageSearchStuff((String) userPass.get("username"), (String) userPass.get("password"));
 
                         System.out.println(json.get("id"));
@@ -75,6 +75,14 @@ public class Server {
 
                         out.println("more data from username: " + userPass.get("username") + " and password " + userPass.get("password"));
                         out.flush();
+                    }
+
+                    if (json.get("id").equals("Sign up")){
+
+                    }
+
+                    if (json.get("id").equals("Create ad")){
+
                     }
 
                 }
