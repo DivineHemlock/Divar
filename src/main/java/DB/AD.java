@@ -12,19 +12,19 @@ public class AD
     private String pictureName;
     private String city;
     private String price;
-    private User user;
+    private String username;
     private Date submitDate;
     private Date expirationDate;
     private String info;
     private String ID;
     private ArrayList<String> tags = new ArrayList<>();
 
-    public AD(String name, String city, String price, User user,String info, ArrayList<String> tags)
+    public AD(String name, String city, String price, String username,String info, ArrayList<String> tags)
     {
         this.name = name;
         this.city = city;
         this.price = price;
-        this.user = user;
+        this.username = username;
         this.submitDate = calendar.getTime();
         calendar.add(Calendar.DATE , 10);
         this.expirationDate = calendar.getTime();
@@ -68,12 +68,12 @@ public class AD
         this.price = price;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getSubmitDate() {

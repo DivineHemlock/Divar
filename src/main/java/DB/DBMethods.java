@@ -8,6 +8,8 @@ import com.mongodb.client.model.Updates;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class DBMethods
@@ -89,17 +91,17 @@ public class DBMethods
         }
     }
 
-    public static JsonObject findUserInDB (String username)
+    public static JsonObject findUserInDB (String username , String password)
     {
         DBHandler handler = new DBHandler();
         Document doc = new Document("username" , username);
+        doc.append("password" , password);
         if (handler.getMainDB().getCollection("users").find(doc).cursor().hasNext()) // if such user exists...
         {
-            String ans = handler.getMainDB().getCollection("users").find(doc).cursor().next().toJson();
             JsonParser parser = new JsonParser();
-            JsonObject json = (JsonObject) parser.parse(ans);
+            JsonObject ans = (JsonObject) parser.parse(handler.getMainDB().getCollection("users").find(doc).cursor().next().toJson());
             handler.getMongoClient().close();
-            return json;
+            return ans;
         }
         else
         {
@@ -107,6 +109,30 @@ public class DBMethods
             return null;
         }
     }
+
+    public static ArrayList<Document> findUsersBookmarkedAds (String username)
+    {
+        ArrayList<Document> ans = new ArrayList<>();
+        DBHandler handler = new DBHandler();
+        Gson gson = new Gson();
+        Document userDoc = new Document("username" , username);
+        User user = gson.fromJson(handler.getMainDB().getCollection("users").find(userDoc).cursor().next().toJson() , User.class);
+        for (String bookmarkID : user.getBookmarkIDs()) // iterating on all of the users bookmarkIDs
+        {
+            for (int i = 0 ; i < AD.counter ; i++) // iterating on all ads
+            {
+                Document adDoc = new Document("ID" , String.valueOf(i));
+                AD ad = gson.fromJson(handler.getMainDB().getCollection("ads").find(adDoc).cursor().next().toJson() , AD.class);
+                if (bookmarkID.equals(ad.getID())) // if the adID and the bookmarkID are equal...
+                {
+                    ans.add(handler.getMainDB().getCollection("ads").find(adDoc).cursor().next());
+                }
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
+
     //******************************************************************************************************
     //********************************************** USER METHODS ******************************************
     //******************************************************************************************************
@@ -244,6 +270,51 @@ public class DBMethods
         return ans;
     }
 
+    public static ArrayList<Document> findAdByText (String text)
+    {
+        ArrayList<Document> ans = new ArrayList<>();
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID" , iAsString);
+            boolean flag = handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("info").toString().contains(text);
+            boolean flag_1 = handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("name").toString().contains(text);
+            if (flag || flag_1)
+            {
+                ans.add(handler.getMainDB().getCollection("ads").find(testDoc).cursor().next());
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
+
+
+    public static void deleteExpiredAds ()
+    {
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID" , iAsString);
+            testDoc = handler.getMainDB().getCollection("ads").find(testDoc).cursor().next();
+            Gson gson = new Gson();
+            AD ad = gson.fromJson(testDoc.toJson() , AD.class);
+            Calendar calendar = Calendar.getInstance();
+            if (calendar.getTime().after(ad.getExpirationDate())) // if the current day is after the expiration date...
+            {
+                handler.getMainDB().getCollection("ads").deleteOne(testDoc);
+            }
+        }
+        handler.getMongoClient().close();
+    }
+
+    public static ArrayList<Document> globalSearch (String city , String tag , String text , String minPrice , String maxPrice)
+    {
+        //if ()
+        return null;
+    }
+
 
     //******************************************************************************************************
     //********************************************** AD METHODS ********************************************
@@ -308,4 +379,5 @@ public class DBMethods
         handler.getMongoClient().close();
         return ans;
     }
+
 }
