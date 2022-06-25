@@ -8,6 +8,8 @@ import com.mongodb.client.model.Updates;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class DBMethods
@@ -264,6 +266,26 @@ public class DBMethods
     }
 
 
+    public static void deleteExpiredAds ()
+    {
+        DBHandler handler = new DBHandler();
+        for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
+        {
+            String iAsString = String.valueOf(i);
+            Document testDoc = new Document("ID" , iAsString);
+            testDoc = handler.getMainDB().getCollection("ads").find(testDoc).cursor().next();
+            Gson gson = new Gson();
+            AD ad = gson.fromJson(testDoc.toJson() , AD.class);
+            Calendar calendar = Calendar.getInstance();
+            if (calendar.getTime().after(ad.getExpirationDate()))
+            {
+                handler.getMainDB().getCollection("ads").deleteOne(testDoc);
+            }
+        }
+        handler.getMongoClient().close();
+    }
+
+
     //******************************************************************************************************
     //********************************************** AD METHODS ********************************************
     //******************************************************************************************************
@@ -327,4 +349,5 @@ public class DBMethods
         handler.getMongoClient().close();
         return ans;
     }
+
 }

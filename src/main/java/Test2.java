@@ -1,3 +1,5 @@
+import DB.AD;
+import DB.DBHandler;
 import DB.DBMethods;
 import DB.User;
 import com.google.gson.Gson;
@@ -11,8 +13,17 @@ public class Test2
 {
     public static void main(String[] args)
     {
-        String s = Objects.requireNonNull(DBMethods.findUserInDB("a", "b")).toString();
-        Gson gson = new Gson();
-        User user = gson.fromJson(s , User.class);
+        DBHandler handler = new DBHandler();
+        handler.getMainDB().getCollection("ads").drop();
+        Calendar calendar = Calendar.getInstance();
+        ArrayList<String> list = new ArrayList<>();
+        String a = "A";
+        list.add(a);
+        AD ad = new AD("test" , "testA" , "testB" , "a" , "aaaaaaaaaaa" ,list );
+        calendar.add(Calendar.MONTH, -4);
+        ad.setExpirationDate(calendar.getTime());
+        DBMethods.makeNewAD(ad);
+        DBMethods.deleteExpiredAds();
+
     }
 }

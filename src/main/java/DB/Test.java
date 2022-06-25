@@ -10,7 +10,7 @@ public class Test
     public static void main(String[] args)
     {
         DBHandler handler = new DBHandler();
-        handler.getMainDB().getCollection("ads").drop();
+        //handler.getMainDB().getCollection("ads").drop();
         handler.getMainDB().getCollection("chats").drop();
         //System.out.println(User.makeUserObjectWithJson(DBMethods.findUserInDB("a")).getBookmarkIDs());
         String a = "a";
@@ -32,13 +32,13 @@ public class Test
         //System.out.println(AD.counter);
         DBMethods.makeNewUser(user);
         DBMethods.makeNewUser(user1);
-        /*System.out.println(DBMethods.makeNewAD(ad));
+        System.out.println(DBMethods.makeNewAD(ad));
         System.out.println(DBMethods.makeNewAD(ad2));
         System.out.println(DBMethods.makeNewAD(ad3));
         System.out.println(DBMethods.makeNewAD(ad4));
         System.out.println(DBMethods.makeNewAD(ad5));
         System.out.println(DBMethods.makeNewAD(ad6));
-        System.out.println(DBMethods.makeNewAD(ad7));*/
+        System.out.println(DBMethods.makeNewAD(ad7));
         Message message = new Message("salam khobi?" , "a" , "john");
         Message message1 = new Message("salam , mersi" , "john" , "a");
         Message message2 = new Message("yoyoyoyoyo" , "a" , "alireza");
