@@ -4,7 +4,12 @@ package Socket;
 import java.io.*;
 import java.net.Socket;
 
+import DB.User;
+import com.example.divar3.UserHolder;
+import com.example.divar3.controller.LoginController;
+import com.example.divar3.controller.PageController;
 import com.google.gson.Gson;
+import javafx.fxml.FXMLLoader;
 import org.json.simple.parser.ParseException;
 
 
@@ -28,6 +33,7 @@ public class Client {
 
 //        String jsonRequest = gson.toJson(request);
         String jsonRequest = gson.toJson(request);
+        System.out.println(request.getId());
         out.println(jsonRequest);
         out.flush();
     }
@@ -44,14 +50,16 @@ public class Client {
                     try {
                         response = in.readLine();
 
-                        Request JsonToClassResponse = gson.fromJson(response, Request.class);
+                        Request jsonToClassResponse = gson.fromJson(response, Request.class);
 //                        System.out.println(response);
-                        switch (JsonToClassResponse.getId()){
+                        switch (jsonToClassResponse.getId()){
                             case "SC Login" -> {
-
+                                scLogin(jsonToClassResponse.getData());
                             }
                             case "Fail Login" -> {
-
+                                FXMLLoader loader = PageController.open("loginPage");
+                                LoginController loginController = loader.getController();
+                                loginController.setError();
                             }
                         }
                     } catch (IOException e) {
@@ -61,4 +69,13 @@ public class Client {
             }
         }).start();
     }
+
+    private void scLogin(String data) throws IOException {
+        Gson gson = new Gson();
+        User user = gson.fromJson(data,User.class);
+        UserHolder.setUser(user);
+        PageController.close();
+        PageController.open("menu");
+    }
+
 }

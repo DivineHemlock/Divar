@@ -1,5 +1,7 @@
 package Socket;
 
+import DB.DBMethods;
+import DB.User;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -100,17 +102,19 @@ public class Server {
 
     public static Request responseLogin(String data){
         Gson gson = new Gson();
-//        JSONObject userPass = gson.fromJson(data, JSONObject.class);
-
+        System.out.println("ss");
+        JSONObject userPass = gson.fromJson(data, JSONObject.class);
+        String username = userPass.get("username").toString();
+        String password = userPass.get("password").toString();
+        User user = gson.fromJson(DBMethods.findUserInDB(username, password).toString(), User.class);
         Request response = new Request();
-        response.setData("more data");
-
-        if (data.equals("ali")){
-            response.setId("SC Login");
-        } else{
+        if(user == null){
             response.setId("Fail Login");
         }
-
+        else {
+            response.setId("SC Login");
+            response.setData(gson.toJson(user));
+        }
         return response;
     }
 }

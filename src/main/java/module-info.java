@@ -3,7 +3,6 @@ module com.example.divar3 {
     requires javafx.fxml;
     requires javafx.web;
     requires com.google.gson;
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires validatorfx;
@@ -17,4 +16,8 @@ module com.example.divar3 {
 
     opens com.example.divar3.controller to javafx.fxml;
     exports com.example.divar3;
+    opens com.example.divar3 to com.google.gson;
+    opens Socket to com.google.gson;
+    exports Socket;
+
 }

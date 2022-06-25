@@ -2,6 +2,7 @@ package com.example.divar3.controller;
 
 //import Socket.Socket.Client;
 //import Socket.TransferInfos;
+import com.example.divar3.ClientHolder;
 import com.example.divar3.Network;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import Socket.*;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -28,26 +30,20 @@ public class LoginController {
     private TextField usernameField;
 
     @FXML
-    void LoginClicked(ActionEvent event) throws IOException {
+    void LoginClicked(ActionEvent event) throws IOException, ParseException {
+        Gson gson = new Gson();
         if (isFieldEmpty()){
             return;
         }
-        Gson gson = new Gson();
         String username = usernameField.getText();
         String password = passwordField.getText();
-
-        //TransferInfos.username = username;
-        Socket socket = new Socket("127.0.0.1", 3191);
-        //Socket.Client client = new Socket.Client(socket, TransferInfos.username);
-        socket.getOutputStream();
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("username", username);
-        jsonObject.addProperty("password", password);
-        String data = gson.toJson(jsonObject);
-        //request
-        //json request
-        // Socket.Client client =  ClientHolder.get
-        //client.Socket.Main()
+        JsonObject data = new JsonObject();
+        data.addProperty("username", username);
+        data.addProperty("password", password);
+        Request request = new Request();
+        request.setId("Login");
+        request.setData(gson.toJson(data));
+        ClientHolder.getClient().sendRequest(request);
     }
 
     @FXML
@@ -69,6 +65,9 @@ public class LoginController {
         else {
             return false;
         }
+    }
+    public void setError(){
+        incorectLogin.setVisible(true);
     }
 
 }
