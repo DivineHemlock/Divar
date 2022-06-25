@@ -44,35 +44,35 @@
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.SignUpController">
    <children>
-      <ImageView fitHeight="24.0" fitWidth="29.0" layoutX="412.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="29.0" layoutX="412.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@whiteUserIcon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="414.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="413.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@whitePasswordIcon.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameField" layoutX="258.0" layoutY="111.0" promptText="username" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
-      <ImageView fitHeight="72.0" fitWidth="172.0" layoutX="255.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="usernameField" layoutX="258.0" layoutY="133.0" promptText="username" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <ImageView fitHeight="63.0" fitWidth="174.0" layoutX="263.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@EBay_logo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="411.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="411.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@whiteHomeIcon.png" />
          </image>
       </ImageView>
-      <PasswordField fx:id="passwordField" layoutX="258.0" layoutY="144.0" promptText="password" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
-      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="411.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
+      <PasswordField fx:id="passwordField" layoutX="257.0" layoutY="166.0" promptText="password" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <ImageView fitHeight="24.0" fitWidth="51.0" layoutX="411.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@whitePhoneIcon.png" />
          </image>
       </ImageView>
-      <TextField fx:id="phoneNumberField" layoutX="258.0" layoutY="176.0" promptText="phone number" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
-      <Button layoutX="345.0" layoutY="251.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;" text="sign up" textFill="WHITE" />
+      <TextField fx:id="phoneNumberField" layoutX="258.0" layoutY="201.0" promptText="phone number" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <Button layoutX="342.0" layoutY="278.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;" text="sign up" textFill="WHITE" />
       <Label fx:id="incorrectNumber" layoutX="247.0" layoutY="291.0" prefHeight="24.0" prefWidth="165.0" text="phone number is incorrect" textFill="RED" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -81,13 +81,15 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Button layoutX="244.0" layoutY="250.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="log in" textFill="WHITE" />
-      <ChoiceBox fx:id="cityChoiceBox" layoutX="258.0" layoutY="211.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
-      <Button layoutX="135.0" layoutY="251.0" mnemonicParsing="false" onAction="#insertPictureClicked" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: &quot;10e8e8&quot;; -fx-background-radius: 100;" text="Insert Picture" textFill="WHITE" />
-      <ImageView fx:id="profileImage" fitHeight="112.0" fitWidth="121.0" layoutX="123.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="247.0" layoutY="278.0" mnemonicParsing="false" onAction="#LoginClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: &quot;4caf50&quot;; -fx-background-radius: 20;" text="log in" textFill="WHITE" />
+      <ChoiceBox fx:id="cityChoiceBox" layoutX="258.0" layoutY="235.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <Button layoutX="147.0" layoutY="278.0" mnemonicParsing="false" onAction="#insertPictureClicked" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: &quot;10e8e8&quot;; -fx-background-radius: 100;" text="Insert Picture" textFill="WHITE" />
+      <ImageView fx:id="profileImage" fitHeight="112.0" fitWidth="121.0" layoutX="135.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@User_icon_2.svg.png" />
+            <Image url="@user.jpg" />
          </image>
       </ImageView>
+      <TextField fx:id="lastNameField" layoutX="259.0" layoutY="103.0" promptText="last name" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <TextField fx:id="firstNameField" layoutX="259.0" layoutY="72.0" promptText="name" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
    </children>
 </AnchorPane>
