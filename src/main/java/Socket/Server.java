@@ -1,7 +1,8 @@
+package Socket;
+
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +11,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Server {
     private ArrayList<ClientHandler> clients;
@@ -100,12 +100,12 @@ public class Server {
 
     public static Request responseLogin(String data){
         Gson gson = new Gson();
-        JSONObject userPass = gson.fromJson(data, JSONObject.class);
+//        JSONObject userPass = gson.fromJson(data, JSONObject.class);
 
         Request response = new Request();
         response.setData("more data");
 
-        if (userPass.get("username").equals("ali")){
+        if (data.equals("ali")){
             response.setId("SC Login");
         } else{
             response.setId("Fail Login");

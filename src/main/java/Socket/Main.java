@@ -1,8 +1,9 @@
-import org.json.simple.JSONObject;
+package Socket;
+
+
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Main { // FX main
     public static void main(String[] args) throws IOException, ParseException {

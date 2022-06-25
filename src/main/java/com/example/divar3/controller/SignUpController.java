@@ -76,8 +76,8 @@ public class SignUpController {
         String city = cityChoiceBox.getValue();
         //User user = new user(pas city num name);
         //string data = json
-        //Client client = ClientHolder.get();
-        //Request request ..
+        //Socket.Client client = ClientHolder.get();
+        //Socket.Request request ..
         //client.main()
     }
 

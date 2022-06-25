@@ -1,6 +1,6 @@
 package com.example.divar3.controller;
 
-//import Socket.Client;
+//import Socket.Socket.Client;
 //import Socket.TransferInfos;
 import com.example.divar3.Network;
 import com.google.gson.Gson;
@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import Socket.*;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -37,7 +38,7 @@ public class LoginController {
 
         //TransferInfos.username = username;
         Socket socket = new Socket("127.0.0.1", 3191);
-        //Client client = new Client(socket, TransferInfos.username);
+        //Socket.Client client = new Socket.Client(socket, TransferInfos.username);
         socket.getOutputStream();
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("username", username);
@@ -45,8 +46,8 @@ public class LoginController {
         String data = gson.toJson(jsonObject);
         //request
         //json request
-        // Client client =  ClientHolder.get
-        //client.Main()
+        // Socket.Client client =  ClientHolder.get
+        //client.Socket.Main()
     }
 
     @FXML

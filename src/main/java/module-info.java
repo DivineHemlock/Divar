@@ -13,6 +13,7 @@ module com.example.divar3 {
     requires org.mongodb.driver.core;
     requires org.mongodb.bson;
     requires org.mongodb.driver.sync.client;
+    requires json.simple;
 
     opens com.example.divar3.controller to javafx.fxml;
     exports com.example.divar3;

@@ -1,11 +1,10 @@
+package Socket;
+
+
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.google.gson.Gson;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
@@ -27,8 +26,8 @@ public class Client {
     public void sendRequest(Request request) throws IOException, ParseException {
         Gson gson = new Gson();
 
+//        String jsonRequest = gson.toJson(request);
         String jsonRequest = gson.toJson(request);
-
         out.println(jsonRequest);
         out.flush();
     }
