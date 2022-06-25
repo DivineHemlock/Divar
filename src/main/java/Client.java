@@ -35,6 +35,8 @@ public class Client {
 
     public void listenForMessage() {
         new Thread(new Runnable() {
+            Gson gson = new Gson();
+
             @Override
             public void run() {
                 String response;
@@ -42,7 +44,17 @@ public class Client {
                 while (socket.isConnected()) {
                     try {
                         response = in.readLine();
-                        System.out.println(response);
+
+                        Request JsonToClassResponse = gson.fromJson(response, Request.class);
+//                        System.out.println(response);
+                        switch (JsonToClassResponse.getId()){
+                            case "SC Login" -> {
+
+                            }
+                            case "Fail Login" -> {
+
+                            }
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
