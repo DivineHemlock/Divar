@@ -89,17 +89,17 @@ public class DBMethods
         }
     }
 
-    public static JsonObject findUserInDB (String username)
+    public static JsonObject findUserInDB (String username , String password)
     {
         DBHandler handler = new DBHandler();
         Document doc = new Document("username" , username);
+        doc.append("password" , password);
         if (handler.getMainDB().getCollection("users").find(doc).cursor().hasNext()) // if such user exists...
         {
-            String ans = handler.getMainDB().getCollection("users").find(doc).cursor().next().toJson();
             JsonParser parser = new JsonParser();
-            JsonObject json = (JsonObject) parser.parse(ans);
+            JsonObject ans = (JsonObject) parser.parse(handler.getMainDB().getCollection("users").find(doc).cursor().next().toJson());
             handler.getMongoClient().close();
-            return json;
+            return ans;
         }
         else
         {
