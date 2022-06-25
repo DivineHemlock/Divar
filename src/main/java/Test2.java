@@ -20,10 +20,11 @@ public class Test2
         String a = "A";
         list.add(a);
         AD ad = new AD("test" , "testA" , "testB" , "a" , "aaaaaaaaaaa" ,list );
-        calendar.add(Calendar.MONTH, -4);
-        ad.setExpirationDate(calendar.getTime());
+        //calendar.add(Calendar.MONTH, -4);
+        //ad.setExpirationDate(calendar.getTime());
         DBMethods.makeNewAD(ad);
-        DBMethods.deleteExpiredAds();
+        //DBMethods.deleteExpiredAds();
+        System.out.println(DBMethods.findAdByText("t").get(0).get("city"));
 
     }
 }

@@ -10,8 +10,9 @@ public class Test
     public static void main(String[] args)
     {
         DBHandler handler = new DBHandler();
-        //handler.getMainDB().getCollection("ads").drop();
+        handler.getMainDB().getCollection("ads").drop();
         handler.getMainDB().getCollection("chats").drop();
+        handler.getMainDB().getCollection("users").drop();
         //System.out.println(User.makeUserObjectWithJson(DBMethods.findUserInDB("a")).getBookmarkIDs());
         String a = "a";
         String b = "b";
@@ -30,6 +31,8 @@ public class Test
         AD ad6 = new AD("pizza-b" , "f" , "2000" , "a","hello" , list_b);
         AD ad7 = new AD("pizza-b" , "g" , "2000" ,"a","hello" , list_b);
         //System.out.println(AD.counter);
+        user.addBookmark("0");
+        user.addBookmark("1");
         DBMethods.makeNewUser(user);
         DBMethods.makeNewUser(user1);
         System.out.println(DBMethods.makeNewAD(ad));
@@ -49,6 +52,9 @@ public class Test
         chat.addMessage(message1);
         DBMethods.addChat(chat);
         DBMethods.addChat(chat1);
-        System.out.println(DBMethods.findChatByOneUsername("a").get(1).get("messages"));
+        //System.out.println(DBMethods.findChatByOneUsername("a").get(1).get("messages"));
+        //System.out.println(AD.counter);
+        System.out.println(user.getBookmarkIDs());
+        System.out.println(DBMethods.findUsersBookmarkedAds("john"));
     }
 }

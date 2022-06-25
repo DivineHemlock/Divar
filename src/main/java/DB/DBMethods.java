@@ -109,6 +109,30 @@ public class DBMethods
             return null;
         }
     }
+
+    public static ArrayList<Document> findUsersBookmarkedAds (String username)
+    {
+        ArrayList<Document> ans = new ArrayList<>();
+        DBHandler handler = new DBHandler();
+        Gson gson = new Gson();
+        Document userDoc = new Document("username" , username);
+        User user = gson.fromJson(handler.getMainDB().getCollection("users").find(userDoc).cursor().next().toJson() , User.class);
+        for (String bookmarkID : user.getBookmarkIDs()) // iterating on all of the users bookmarkIDs
+        {
+            for (int i = 0 ; i < AD.counter ; i++) // iterating on all ads
+            {
+                Document adDoc = new Document("ID" , String.valueOf(i));
+                AD ad = gson.fromJson(handler.getMainDB().getCollection("ads").find(adDoc).cursor().next().toJson() , AD.class);
+                if (bookmarkID.equals(ad.getID())) // if the adID and the bookmarkID are equal...
+                {
+                    ans.add(handler.getMainDB().getCollection("ads").find(adDoc).cursor().next());
+                }
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
+
     //******************************************************************************************************
     //********************************************** USER METHODS ******************************************
     //******************************************************************************************************
@@ -277,12 +301,18 @@ public class DBMethods
             Gson gson = new Gson();
             AD ad = gson.fromJson(testDoc.toJson() , AD.class);
             Calendar calendar = Calendar.getInstance();
-            if (calendar.getTime().after(ad.getExpirationDate()))
+            if (calendar.getTime().after(ad.getExpirationDate())) // if the current day is after the expiration date...
             {
                 handler.getMainDB().getCollection("ads").deleteOne(testDoc);
             }
         }
         handler.getMongoClient().close();
+    }
+
+    public static ArrayList<Document> globalSearch (String city , String tag , String text , String minPrice , String maxPrice)
+    {
+        //if ()
+        return null;
     }
 
 
