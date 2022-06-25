@@ -48,6 +48,25 @@ public class User
         return user;
     }
 
+    public boolean addBookmark (String bookmarkID)
+    {
+        this.bookmarkIDs.add(bookmarkID);
+        return true;
+    }
+
+    public boolean removeBookmark (String bookmarkID)
+    {
+        for (String bookmark : this.bookmarkIDs)
+        {
+            if (bookmark.equals(bookmarkID))
+            {
+                this.bookmarkIDs.remove(bookmarkID);
+                break;
+            }
+        }
+        return true;
+    }
+
     public String getUsername() {
         return username;
     }

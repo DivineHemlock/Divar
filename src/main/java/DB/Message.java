@@ -3,13 +3,13 @@ package DB;
 public class Message
 {
     private String text;
-    private User sender;
-    private User receiver;
+    private String senderUsername;
+    private String receiverUsername;
 
-    public Message(String text, User sender , User receiver) {
+    public Message(String text, String sender , String receiver) {
         this.text = text;
-        this.sender = sender;
-        this.receiver = receiver;
+        this.senderUsername = sender;
+        this.receiverUsername = receiver;
     }
 
     public String getText() {
@@ -20,19 +20,19 @@ public class Message
         this.text = text;
     }
 
-    public User getSender() {
-        return sender;
+    public String getSenderUsername() {
+        return senderUsername;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public String getReceiverUsername() {
+        return receiverUsername;
     }
 
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
+    public void setReceiverUsername(String receiverUsername) {
+        this.receiverUsername = receiverUsername;
     }
 }
