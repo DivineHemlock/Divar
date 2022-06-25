@@ -8,6 +8,7 @@ import DB.User;
 import com.example.divar3.UserHolder;
 import com.example.divar3.controller.LoginController;
 import com.example.divar3.controller.PageController;
+import com.example.divar3.controller.SignUpController;
 import com.google.gson.Gson;
 import javafx.fxml.FXMLLoader;
 import org.json.simple.parser.ParseException;
@@ -60,6 +61,15 @@ public class Client {
                                 FXMLLoader loader = PageController.open("loginPage");
                                 LoginController loginController = loader.getController();
                                 loginController.setError();
+                            }
+                            case "scSignUp" -> {
+                                PageController.close();
+                                PageController.open("loginPage");
+                            }
+                            case "failSignUP" -> {
+                                FXMLLoader loader = PageController.open("signUp");
+                                SignUpController signUpController = loader.getController();
+
                             }
                         }
                     } catch (IOException e) {

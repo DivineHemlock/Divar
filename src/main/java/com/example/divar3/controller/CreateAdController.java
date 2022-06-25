@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -130,5 +132,11 @@ public class CreateAdController {
             return false;
         }
         return true;
+    }
+    private String standardPrice(String price){
+        double dPrice = Double.parseDouble(price);
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        return "s";
     }
 }

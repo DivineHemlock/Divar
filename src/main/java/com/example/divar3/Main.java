@@ -1,7 +1,10 @@
 package com.example.divar3;
 
 //import Socket.Socket.Client;
-import DB.*;
+import DB.AD;
+import DB.Chat;
+import DB.Message;
+import DB.User;
 import com.example.divar3.controller.AdViewController;
 import com.example.divar3.controller.LoginController;
 import com.example.divar3.controller.PageController;
@@ -23,7 +26,9 @@ import java.util.Scanner;
 
 public class Main extends Application{
     public static void main(String[] args) throws IOException {
-        launch(args);
+       Client client = new Client();
+       ClientHolder.setClient(client);
+       launch(args);
     }
 
     @Override

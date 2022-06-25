@@ -77,6 +77,12 @@ public class Server {
                             out.println(responseJson);
                             out.flush();
                         }
+                        case "signUP" ->{
+                            Request response = responseSignUP(data);
+                            String responseJson = gson.toJson(response);
+                            out.println(responseJson);
+                            out.flush();
+                        }
                     }
                 }
             } catch (IOException e) {
@@ -114,6 +120,20 @@ public class Server {
         else {
             response.setId("SC Login");
             response.setData(gson.toJson(user));
+        }
+        return response;
+    }
+
+    public static Request responseSignUP(String data){
+        Request response = new Request();
+        Gson gson = new Gson();
+        User user = gson.fromJson(data,User.class);
+        boolean isCreated = DBMethods.makeNewUser(user);
+        if (isCreated){
+            response.setId("scSignUP");
+        }
+        else {
+            response.setId("failSignUP");
         }
         return response;
     }

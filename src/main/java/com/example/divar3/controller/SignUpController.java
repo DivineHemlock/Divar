@@ -1,6 +1,10 @@
 package com.example.divar3.controller;
 
+import DB.User;
+import Socket.Request;
+import com.example.divar3.ClientHolder;
 import com.example.divar3.HelloController;
+import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,6 +52,13 @@ public class SignUpController {
     private Label usernameError;
 
     @FXML
+    private TextField firstNameField;
+
+    @FXML
+    private TextField lastNameField;
+
+
+    @FXML
     private ChoiceBox<String> cityChoiceBox;
 
     @FXML
@@ -61,7 +73,8 @@ public class SignUpController {
     }
 
     @FXML
-    void signUpClicked(ActionEvent event) throws IOException, InterruptedException {
+    void signUpClicked(ActionEvent event) throws IOException, InterruptedException, ParseException {
+        Gson gson = new Gson();
         incorrectNumber.setVisible(false);
         if (isFieldEmpty()){
             return;
@@ -74,6 +87,14 @@ public class SignUpController {
         String username = usernameField.getText();
         String phoneNumber = phoneNumberField.getText();
         String city = cityChoiceBox.getValue();
+        String firsName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        User user = new User(username, password,firsName, lastName,phoneNumber, city,
+                "1","1");
+        Request request = new Request();
+        request.setData(gson.toJson(user));
+        request.setId("signUp");
+        ClientHolder.getClient().sendRequest(request);
         //User user = new user(pas city num name);
         //string data = json
         //Socket.Client client = ClientHolder.get();
@@ -90,7 +111,8 @@ public class SignUpController {
             return true;
         }
         if (usernameField.getText().equals("") || passwordField.getText().equals("") ||
-                phoneNumberField.getText().equals("")){
+                phoneNumberField.getText().equals("")|| firstNameField.equals("")
+        ||lastNameField.equals("")){
             return true;
         }
         else {
@@ -147,6 +169,10 @@ public class SignUpController {
 
     private void setImage(File image) {
         this.image = image;
+    }
+
+    public void userError(){
+        usernameError.setVisible(true);
     }
 
 }
