@@ -6,14 +6,12 @@ import java.util.Scanner;
 
 public class Main { // FX main
     public static void main(String[] args) throws IOException, ParseException {
-        Scanner scanner = new Scanner(System.in);
         Request request = new Request();
-        JSONObject userPass = new JSONObject();
 
-        System.out.println("request:");
-        String requestID = scanner.nextLine();
+        request.setId("Login");
+        request.setData("aryan");
 
         Client client = new Client();
-        client.sendRequest(requestID);
+        client.sendRequest(request);
     }
 }

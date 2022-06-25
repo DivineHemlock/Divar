@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -42,6 +43,8 @@ public class Server {
     private static class ClientHandler implements Runnable{
 
         private final Socket clientSocket;
+        PrintWriter out;
+        BufferedReader in;
 
         public ClientHandler(Socket socket){
             this.clientSocket = socket;
@@ -50,10 +53,8 @@ public class Server {
 
         @Override
         public void run() {
-            Scanner scanner = new Scanner(System.in);
-            PrintWriter out = null;
-            BufferedReader in = null;
             try {
+                Gson gson = new Gson();
                 out = new PrintWriter(clientSocket.getOutputStream(), true);
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -63,30 +64,20 @@ public class Server {
 
                 while ((requestJson = in.readLine()) != null){
 
-                    JSONObject json = (JSONObject) parser.parse(requestJson);
-                    JSONObject userPass = (JSONObject) parser.parse((String) json.get("data"));
+                    Request request = gson.fromJson(requestJson, Request.class);
+                    String id = request.getId();
+                    String data = request.getData();
 
-                    if (json.get("id").equals("Login")){
-                        loginPageSearchStuff((String) userPass.get("username"), (String) userPass.get("password"));
-
-                        System.out.println(json.get("id"));
-                        System.out.println(userPass.get("username"));
-                        System.out.println(userPass.get("password"));
-
-                        out.println("more data from username: " + userPass.get("username") + " and password " + userPass.get("password"));
-                        out.flush();
+                    switch (id){
+                        case "Login" -> {
+                            Request response = responseLogin(data);
+                            String responseJson = gson.toJson(response);
+                            out.println(responseJson);
+                            out.flush();
+                        }
                     }
-
-                    if (json.get("id").equals("Sign up")){
-
-                    }
-
-                    if (json.get("id").equals("Create ad")){
-
-                    }
-
                 }
-            } catch (IOException | ParseException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 try{
@@ -105,6 +96,22 @@ public class Server {
 
     public static void loginPageSearchStuff(String username, String password){
         // Searching methods
+    }
+
+    public static Request responseLogin(String data){
+        Gson gson = new Gson();
+        JSONObject userPass = gson.fromJson(data, JSONObject.class);
+
+        Request response = new Request();
+        response.setData("more data");
+
+        if (userPass.get("username").equals("ali")){
+            response.setId("SC Login");
+        } else{
+            response.setId("Fail Login");
+        }
+
+        return response;
     }
 }
 
