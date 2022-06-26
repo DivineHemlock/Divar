@@ -6,6 +6,8 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -65,6 +67,7 @@ public class Server {
                 while ((requestJson = in.readLine()) != null){
 
                     Request request = gson.fromJson(requestJson, Request.class);
+
                     String id = request.getId();
                     String data = request.getData();
 
@@ -77,7 +80,7 @@ public class Server {
                             out.flush();
                         }
                         case "Send File" -> {
-                            File file = new File("url");
+                            FileOutputStream file = new FileOutputStream("url");
                             sendFile(file);
                         }
                     }
@@ -134,16 +137,15 @@ public class Server {
         inputStream.close();
     }
 
-    public static void sendFile(File file) throws IOException {
-        OutputStream outputStream = socket.getOutputStream();
-        FileInputStream fileInputStream = new FileInputStream(file);
-        byte[] buffer = new byte[1024];
-        while (fileInputStream.read(buffer) > 0){
-            outputStream.write(buffer);
-            outputStream.flush();
-        }
-        outputStream.close();
-        fileInputStream.close();
+    public static void sendFile(FileOutputStream file) throws IOException { // send File to Client
+        OutputStream os = socket.getOutputStream();
+        FileInputStream fr = new FileInputStream("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg");
+
+        System.out.println(Files.size(Path.of("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg")));
+        byte b[] = new byte[25000];
+        fr.read(b, 0, b.length);
+        System.out.println(Arrays.toString(b));
+        os.write(b, 0, b.length);
     }
 }
 

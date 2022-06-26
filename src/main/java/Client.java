@@ -62,4 +62,12 @@ public class Client {
             }
         }).start();
     }
+
+    public void getFile(FileOutputStream fr) throws IOException { // get file from Server
+        InputStream is = socket.getInputStream();
+
+        byte[] b = new byte[25000];
+        is.read(b, 0, b.length);
+        fr.write(b, 0, b.length);
+    }
 }
