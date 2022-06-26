@@ -80,8 +80,8 @@ public class Server {
                             out.flush();
                         }
                         case "Send File" -> {
-                            FileOutputStream file = new FileOutputStream("url");
-                            sendFile(file);
+                            FileInputStream file = new FileInputStream("url");
+                            sendFile(file, socket);
                         }
                         case "Ad image" -> {
                             // response
@@ -129,27 +129,21 @@ public class Server {
         return response;
     }
 
-    public static void getFile(File file) throws IOException {
-        InputStream inputStream = socket.getInputStream();
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        byte[] buffer = new byte[1024];
-        while (inputStream.read(buffer) > 0){
-            fileOutputStream.write(buffer);
-            System.out.println(Arrays.toString(buffer));
-        }
-        fileOutputStream.close();
-        inputStream.close();
+    public static void sendFile(FileInputStream fr, Socket socket) throws IOException {
+        OutputStream os = socket.getOutputStream();
+
+        byte b[] = new byte[16000];
+        fr.read(b, 0, b.length);
+
+        os.write(b, 0, b.length);
     }
 
-    public static void sendFile(FileOutputStream file) throws IOException { // send File to Client
-        OutputStream os = socket.getOutputStream();
-        FileInputStream fr = new FileInputStream("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg");
+    public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
+        InputStream is = socket.getInputStream();
 
-        System.out.println(Files.size(Path.of("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg")));
-        byte b[] = new byte[25000];
-        fr.read(b, 0, b.length);
-        System.out.println(Arrays.toString(b));
-        os.write(b, 0, b.length);
+        byte[] b = new byte[16000];
+        is.read(b, 0, b.length);
+        fr.write(b, 0, b.length);
     }
 }
 

@@ -63,15 +63,20 @@ public class Client {
         }).start();
     }
 
-    public void getFile(FileOutputStream fr) throws IOException { // get file from Server
-        InputStream is = socket.getInputStream();
+    public static void sendFile(FileInputStream fr, Socket socket) throws IOException {
+        OutputStream os = socket.getOutputStream();
 
-        byte[] b = new byte[25000];
-        is.read(b, 0, b.length);
-        fr.write(b, 0, b.length);
+        byte b[] = new byte[16000];
+        fr.read(b, 0, b.length);
+
+        os.write(b, 0, b.length);
     }
 
-    public void sendFile(FileOutputStream fr) {
+    public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
+        InputStream is = socket.getInputStream();
 
+        byte[] b = new byte[16000];
+        is.read(b, 0, b.length);
+        fr.write(b, 0, b.length);
     }
 }
