@@ -1,6 +1,9 @@
 package com.example.divar3.controller;
 
+import DB.AD;
+import DB.User;
 import com.example.divar3.HelloController;
+import com.example.divar3.UserHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,6 +60,17 @@ public class CreateAdController {
             invalidPriceLabel.setVisible(true);
             return;
         }
+        String title = titleTextField.getText();
+        String price = standardPrice(priceTextField.getText());
+        String tag = tagChoiceBox.getValue();
+        String details = detailsTextField.getText();
+        String city = UserHolder.getUser().getCity();
+        String phoneNumber = "not available";
+        if (UserHolder.getUser().getIsNumberPublic().equals("1")){
+            phoneNumber = UserHolder.getUser().getPhoneNumber();
+        }
+        AD ad = new AD("","",
+                "",)
     }
 
     @FXML
@@ -137,6 +151,8 @@ public class CreateAdController {
         double dPrice = Double.parseDouble(price);
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
-        return "s";
+        String sPrice = decimalFormat.format(dPrice);
+        sPrice = sPrice + "$";
+        return sPrice;
     }
 }

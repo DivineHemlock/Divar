@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,12 +12,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.ProfilePageController">
    <children>
       <ScrollPane layoutX="7.0" layoutY="59.0" prefHeight="295.0" prefWidth="449.0">
          <content>
-            <GridPane prefHeight="58.0" prefWidth="448.0">
+            <GridPane fx:id="grid" prefHeight="58.0" prefWidth="448.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -40,10 +40,15 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="95.0" fitWidth="122.0" layoutX="464.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="userPicture" fitHeight="95.0" fitWidth="122.0" layoutX="477.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@user/user.jpg" />
          </image>
       </ImageView>
+      <Button layoutX="474.0" layoutY="129.0" mnemonicParsing="false" onAction="#insertPictureClicked" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: &quot;10e8e8&quot;; -fx-background-radius: 100;" text="Insert Picture" textFill="WHITE" />
+      <Button layoutX="477.0" layoutY="325.0" mnemonicParsing="false" onAction="#bookmarkClicked" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: &quot;24f03a&quot;; -fx-background-radius: 20;" text="Show bookmarks" textFill="WHITE" />
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="163.0" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: &quot;18df8e&quot;; -fx-background-radius: 20;" text="Username" textFill="WHITE" />
+      <Label fx:id="cityField" alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="194.0" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: &quot;18df8e&quot;; -fx-background-radius: 20;" text="city" textFill="WHITE" />
+      <Label fx:id="phoneNumberField" alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="227.0" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: &quot;18df8e&quot;; -fx-background-radius: 20;" text="Phone number" textFill="WHITE" />
    </children>
 </AnchorPane>
