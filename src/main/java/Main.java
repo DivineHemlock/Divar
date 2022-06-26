@@ -11,7 +11,8 @@ public class Main { // FX main
         Request request1 = new Request();
         Request request2 = new Request();
 
-        request1.setId("Login");
+        request1.setId("Send file");
+//        request1.setId("Ad image");
 
         JSONObject jsonData = new JSONObject();
         jsonData.put("username", "ali");

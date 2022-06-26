@@ -70,4 +70,8 @@ public class Client {
         is.read(b, 0, b.length);
         fr.write(b, 0, b.length);
     }
+
+    public void sendFile(FileOutputStream fr) {
+
+    }
 }

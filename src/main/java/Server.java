@@ -83,6 +83,10 @@ public class Server {
                             FileOutputStream file = new FileOutputStream("url");
                             sendFile(file);
                         }
+                        case "Ad image" -> {
+                            // response
+                            //getFile(new File());
+                        }
                     }
                 }
             } catch (IOException e) {
