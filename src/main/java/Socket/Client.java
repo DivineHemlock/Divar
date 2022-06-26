@@ -10,6 +10,7 @@ import com.example.divar3.controller.LoginController;
 import com.example.divar3.controller.PageController;
 import com.example.divar3.controller.SignUpController;
 import com.google.gson.Gson;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import org.json.simple.parser.ParseException;
 
@@ -34,7 +35,6 @@ public class Client {
 
 //        String jsonRequest = gson.toJson(request);
         String jsonRequest = gson.toJson(request);
-        System.out.println(request.getId());
         out.println(jsonRequest);
         out.flush();
     }
@@ -58,17 +58,55 @@ public class Client {
                                 scLogin(jsonToClassResponse.getData());
                             }
                             case "Fail Login" -> {
-                                FXMLLoader loader = PageController.open("loginPage");
-                                LoginController loginController = loader.getController();
-                                loginController.setError();
+                                try {
+                                    Platform.runLater(
+                                            () -> {
+                                                PageController.close();
+                                                FXMLLoader loader = null;
+                                                try {
+                                                    loader = PageController.open("loginPage");
+                                                } catch (IOException e) {
+                                                    throw new RuntimeException(e);
+                                                }
+                                                LoginController loginController = loader.getController();
+                                                loginController.setError();
+                                            }
+                                    );
+
+                                }
+                                catch (Exception e){
+                                    System.out.println(e.getMessage());
+                                }
+
                             }
-                            case "scSignUp" -> {
-                                PageController.close();
-                                PageController.open("loginPage");
+                            case "scSignUP" -> {
+                                Platform.runLater(
+                                        () -> {
+                                            PageController.close();
+                                            try {
+                                                PageController.open("loginPage");
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                        }
+                                );
+
                             }
                             case "failSignUP" -> {
-                                FXMLLoader loader = PageController.open("signUp");
-                                SignUpController signUpController = loader.getController();
+                                Platform.runLater(
+                                        () -> {
+                                            PageController.close();
+                                            FXMLLoader loader = null;
+                                            try {
+                                                loader = PageController.open("signUp");
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                            SignUpController signUpController = loader.getController();
+                                            signUpController.userError();
+                                        }
+                                );
+
 
                             }
                         }
@@ -84,8 +122,17 @@ public class Client {
         Gson gson = new Gson();
         User user = gson.fromJson(data,User.class);
         UserHolder.setUser(user);
-        PageController.close();
-        PageController.open("menu");
+        Platform.runLater(
+                () -> {
+                    PageController.close();
+                    try {
+                        PageController.open("menu");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
+
     }
 
 }

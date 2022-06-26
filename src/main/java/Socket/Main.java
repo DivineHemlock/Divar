@@ -1,6 +1,7 @@
 package Socket;
 
 
+import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -15,10 +16,12 @@ public class Main { // FX main
 
         request2.setId("Login");
         request2.setData("aryan");
+        Gson gson = new Gson();
+        gson.toJson(request1);
 
-        Client client = new Client();
+        //Client client = new Client();
 
-        client.sendRequest(request1);
-        client.sendRequest(request2);
+        //client.sendRequest(request1);
+        //client.sendRequest(request2);
     }
 }

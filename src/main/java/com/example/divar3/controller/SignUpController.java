@@ -76,6 +76,7 @@ public class SignUpController {
     void signUpClicked(ActionEvent event) throws IOException, InterruptedException, ParseException {
         Gson gson = new Gson();
         incorrectNumber.setVisible(false);
+        usernameError.setVisible(false);
         if (isFieldEmpty()){
             return;
         }

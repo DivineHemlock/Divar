@@ -2,14 +2,14 @@ package Socket;
 
 import DB.DBMethods;
 import DB.User;
+import com.example.divar3.controller.PageController;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.w3c.dom.Document;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class Server {
                             out.println(responseJson);
                             out.flush();
                         }
-                        case "signUP" ->{
+                        case "signUp" ->{
                             Request response = responseSignUP(data);
                             String responseJson = gson.toJson(response);
                             out.println(responseJson);
@@ -108,11 +108,11 @@ public class Server {
 
     public static Request responseLogin(String data){
         Gson gson = new Gson();
-        System.out.println("ss");
         JSONObject userPass = gson.fromJson(data, JSONObject.class);
         String username = userPass.get("username").toString();
         String password = userPass.get("password").toString();
-        User user = gson.fromJson(DBMethods.findUserInDB(username, password).toString(), User.class);
+        JsonObject jsonObject = DBMethods.findUserInDB(username, password);
+        User user = gson.fromJson(jsonObject, User.class);
         Request response = new Request();
         if(user == null){
             response.setId("Fail Login");
@@ -125,6 +125,7 @@ public class Server {
     }
 
     public static Request responseSignUP(String data){
+        System.out.println("heyyyyy");
         Request response = new Request();
         Gson gson = new Gson();
         User user = gson.fromJson(data,User.class);
