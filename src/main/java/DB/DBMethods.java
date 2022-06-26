@@ -311,8 +311,34 @@ public class DBMethods
 
     public static ArrayList<Document> globalSearch (String city , String tag , String text , String minPrice , String maxPrice)
     {
-        //if ()
-        return null;
+        ArrayList<Document> ans = new ArrayList<>();
+        Gson gson = new Gson();
+        DBHandler handler = new DBHandler();
+        Document doc = new Document();
+        if(!city.equals(""))
+        {
+            doc.append("city" , city);
+        }
+        if (!tag.equals(""))
+        {
+            doc.append("tag" , tag);
+        }
+        for (int i = 0 ; i < AD.counter ; i++) // iterating on all ads in DB
+        {
+            doc.append("ID" , String.valueOf(i));
+            doc = handler.getMainDB().getCollection("ads").find(doc).cursor().next();
+            AD ad = gson.fromJson(doc.toJson() , AD.class);
+            if (!((ad.getInfo().contains(text) || ad.getName().contains(text))))
+            {
+                continue;
+            }
+            if (!((Integer.parseInt(ad.getPrice().toString()) <= Integer.parseInt(maxPrice) && Integer.parseInt(ad.getPrice()) >= Integer.parseInt(maxPrice))))
+            {
+                continue;
+            }
+            ans.add(doc);
+        }
+        return ans;
     }
 
 

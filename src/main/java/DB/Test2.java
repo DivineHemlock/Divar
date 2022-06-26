@@ -20,6 +20,8 @@ public class Test2
         Calendar calendar = Calendar.getInstance();
         ArrayList<String> list = new ArrayList<>();
         String a = "A";
+        String b = "b";
+        list.add(b);
         list.add(a);
         AD ad = new AD("test" , "testA" , "testB" , "a" , "aaaaaaaaaaa" ,list );
         //calendar.add(Calendar.MONTH, -4);
