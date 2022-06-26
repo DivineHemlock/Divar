@@ -1,6 +1,11 @@
 package com.example.divar3.controller;
 
+import Socket.Request;
+import com.example.divar3.ClientHolder;
 import com.example.divar3.HelloController;
+import com.example.divar3.UserHolder;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,8 +59,30 @@ public class menuController {
     }
 
     @FXML
-    void searchClicked(ActionEvent event) {
-
+    void searchClicked(ActionEvent event) throws IOException, ParseException {
+        if (searchTextfield.getText().equals("empty")){
+            return;
+        }
+        String city = UserHolder.getUser().getCity();
+        String search = searchTextfield.getText();
+        String min = minField.getText();
+        String max = maxField.getText();
+        String tag = tagChoiceBox.getValue();
+        if(tagChoiceBox.getValue() == null){
+            tag = "";
+        }
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("city", city);
+        jsonObject.addProperty("search", search);
+        jsonObject.addProperty("min", min);
+        jsonObject.addProperty("max", max);
+        jsonObject.addProperty("tag", tag);
+        Gson gson = new Gson();
+        Request request = new Request();
+        request.setId("search");
+        String data = gson.toJson(jsonObject);
+        request.setData(data);
+        ClientHolder.getClient().sendRequest(request);
     }
 
     @FXML

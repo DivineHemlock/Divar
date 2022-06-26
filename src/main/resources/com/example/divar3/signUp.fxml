@@ -73,11 +73,11 @@
       </ImageView>
       <TextField fx:id="phoneNumberField" layoutX="258.0" layoutY="201.0" promptText="phone number" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
       <Button layoutX="342.0" layoutY="278.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 20;" text="sign up" textFill="WHITE" />
-      <Label fx:id="incorrectNumber" layoutX="247.0" layoutY="291.0" prefHeight="24.0" prefWidth="165.0" text="phone number is incorrect" textFill="RED" visible="false">
+      <Label fx:id="incorrectNumber" layoutX="247.0" layoutY="314.0" prefHeight="24.0" prefWidth="165.0" text="phone number is incorrect" textFill="RED" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label fx:id="usernameError" disable="true" layoutX="237.0" layoutY="291.0" prefHeight="24.0" prefWidth="198.0" text="username allready exist" textFill="RED" visible="false">
+      <Label fx:id="usernameError" layoutX="237.0" layoutY="312.0" prefHeight="24.0" prefWidth="198.0" text="username allready exist" textFill="RED" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>

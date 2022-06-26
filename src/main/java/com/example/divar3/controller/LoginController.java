@@ -3,7 +3,6 @@ package com.example.divar3.controller;
 //import Socket.Socket.Client;
 //import Socket.TransferInfos;
 import com.example.divar3.ClientHolder;
-import com.example.divar3.Network;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
@@ -16,7 +15,6 @@ import Socket.*;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.net.Socket;
 
 public class LoginController {
 

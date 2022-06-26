@@ -3,15 +3,17 @@ package Socket;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
+import DB.AD;
 import DB.User;
-import com.example.divar3.PictureNameHolder;
-import com.example.divar3.UserHolder;
+import com.example.divar3.*;
 import com.example.divar3.controller.LoginController;
 import com.example.divar3.controller.PageController;
 import com.example.divar3.controller.SignUpController;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import org.json.simple.parser.ParseException;
@@ -82,6 +84,9 @@ public class Client {
 
                             }
                             case "scSignUP" -> {
+                                File file = FileHolder.getPic();
+                                FileInputStream fileInputStream = new FileInputStream(file);
+                                sendFile(fileInputStream,socket);
                                 Platform.runLater(
                                         () -> {
                                             PageController.close();
@@ -111,6 +116,22 @@ public class Client {
                             }
                             case  "createdAd" ->{
                                     createdAd(jsonToClassResponse);
+                            }
+                            case "searchResult" ->{
+                                String data = jsonToClassResponse.getData();
+                                TypeToken<ArrayList<AD>> token = new TypeToken<ArrayList<AD>>() {};
+                                ArrayList<AD> ads = gson.fromJson(data,token.getType());
+                                SearchResultHolder.setArrayList(ads);
+                                Platform.runLater(
+                                        () -> {
+
+                                            try {
+                                                PageController.open("adView");
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                        }
+                                );
                             }
                         }
                     } catch (IOException e) {

@@ -252,15 +252,15 @@ public class DBMethods
 
     public static ArrayList<Document> findAdByPriceRange (String minPrice , String maxPrice)
     {
-        int minPriceAsInt = Integer.parseInt(minPrice);
-        int maxPriceAsInt = Integer.parseInt(maxPrice);
+        double minPriceAsInt = Double.parseDouble(minPrice);
+        double maxPriceAsInt = Double.parseDouble(maxPrice);
         ArrayList<Document> ans = new ArrayList<>();
         DBHandler handler = new DBHandler();
         for (int i = 0 ; i < AD.counter ; i++) // iterate on all documents in ad collection
         {
             String iAsString = String.valueOf(i);
             Document testDoc = new Document("ID" , iAsString);
-            int adPrice = Integer.parseInt((String) handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("price")) ;
+            double adPrice = Double.parseDouble((String) handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("price")) ;
             if (adPrice >= minPriceAsInt && adPrice <= maxPriceAsInt)
             {
                 ans.add(handler.getMainDB().getCollection("ads").find(testDoc).cursor().next());
@@ -332,7 +332,7 @@ public class DBMethods
             {
                 continue;
             }
-            if (!((Integer.parseInt(ad.getPrice().toString()) <= Integer.parseInt(maxPrice) && Integer.parseInt(ad.getPrice()) >= Integer.parseInt(maxPrice))))
+            if (!((Double.parseDouble(ad.getPrice().toString()) <= Double.parseDouble(maxPrice) && Double.parseDouble(ad.getPrice()) >= Double.parseDouble(maxPrice))))
             {
                 continue;
             }

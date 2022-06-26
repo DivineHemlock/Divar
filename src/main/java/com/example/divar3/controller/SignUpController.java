@@ -3,6 +3,7 @@ package com.example.divar3.controller;
 import DB.User;
 import Socket.Request;
 import com.example.divar3.ClientHolder;
+import com.example.divar3.FileHolder;
 import com.example.divar3.HelloController;
 import com.google.gson.Gson;
 import javafx.collections.FXCollections;
@@ -70,6 +71,7 @@ public class SignUpController {
     //initialize for setting choice box
     public void initialize() throws IOException {
         setCityChoiceBox();
+        File file = new File(HelloController.class.getResource("user.jpg").toString());
     }
 
     @FXML
@@ -95,12 +97,8 @@ public class SignUpController {
         Request request = new Request();
         request.setData(gson.toJson(user));
         request.setId("signUp");
+        FileHolder.setPic(image);
         ClientHolder.getClient().sendRequest(request);
-        //User user = new user(pas city num name);
-        //string data = json
-        //Socket.Client client = ClientHolder.get();
-        //Socket.Request request ..
-        //client.main()
     }
 
     //this function returns yes if any field is empty

@@ -5,6 +5,7 @@ import DB.AD;
 import DB.Chat;
 import DB.Message;
 import DB.User;
+import com.example.divar3.HelloController;
 import com.example.divar3.controller.AdViewController;
 import com.example.divar3.controller.LoginController;
 import com.example.divar3.controller.PageController;
@@ -29,6 +30,7 @@ public class Main extends Application{
        Client client = new Client();
        ClientHolder.setClient(client);
        launch(args);
+        //File file = new File(HelloController.class.getResource("/profile/kk.txt").toString());
     }
 
     @Override

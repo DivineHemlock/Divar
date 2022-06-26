@@ -170,7 +170,7 @@ public class CreateAdController {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
         String sPrice = decimalFormat.format(dPrice);
-        sPrice = sPrice + "$";
+        sPrice = sPrice;
         return sPrice;
     }
 }

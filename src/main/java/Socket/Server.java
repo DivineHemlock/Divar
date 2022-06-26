@@ -3,12 +3,12 @@ package Socket;
 import DB.AD;
 import DB.DBMethods;
 import DB.User;
-import com.example.divar3.controller.PageController;
+import com.example.divar3.HelloController;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.bson.Document;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.w3c.dom.Document;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -65,8 +65,12 @@ public class Server {
 
                 String requestJson;
 
-                while ((requestJson = in.readLine()) != null){
 
+                while (true){
+                    requestJson = in.readLine();
+                    if (requestJson == null){
+                        break;
+                    }
                     Request request = gson.fromJson(requestJson, Request.class);
                     String id = request.getId();
                     String data = request.getData();
@@ -79,14 +83,29 @@ public class Server {
                             out.flush();
                         }
                         case "signUp" ->{
+                            System.out.println("haloooo");
+                            String username = gson.fromJson(data,User.class).getUsername();
                             Request response = responseSignUP(data);
                             String responseJson = gson.toJson(response);
                             out.println(responseJson);
                             out.flush();
+                            if(response.getId().equals("scSignUp")){
+                                File file = new File(HelloController.class.getResource("/profiles/" +
+                                        username +".jpg").toString());
+                                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                                getFile(fileOutputStream,clientSocket);
+                            }
                         }
                         case "createAd" ->{
                             Request response = new Request();
                             response = responseCreateAd(data);
+                            String responseJson = gson.toJson(response);
+                            out.println(responseJson);
+                            out.flush();
+                        }
+                        case  "search" ->{
+                            System.out.println("kk");
+                            Request response = responseSearch(data);
                             String responseJson = gson.toJson(response);
                             out.println(responseJson);
                             out.flush();
@@ -161,6 +180,27 @@ public class Server {
         Request response = new Request();
         response.setData(ad.getID());
         response.setId("createdAd");
+        return response;
+    }
+    public static Request responseSearch (String data){
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(data, JsonObject.class);
+        String searchText  = jsonObject.get("search").toString();
+        String min = jsonObject.get("min").toString();
+        String max = jsonObject.get("max").toString();
+        String city = jsonObject.get("city").toString();
+        String tag = jsonObject.get("tag").toString();
+        ArrayList<Document> jsonResult = DBMethods.globalSearch(city,tag,searchText,min,max);
+        ArrayList<AD> ads = new ArrayList<>();
+        for (int i = 0; i < jsonResult.size(); i++){
+            AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
+            ads.add(ad);
+        }
+        String responseData = gson.toJson(ads);
+        Request response = new Request();
+        response.setId("searchResult");
+        response.setData(responseData);
+        System.out.println(response.getId());
         return response;
     }
 

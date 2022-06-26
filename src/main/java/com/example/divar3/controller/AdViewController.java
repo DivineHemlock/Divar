@@ -26,6 +26,9 @@ public class AdViewController {
         int rows = 2;
         int size = SearchResultHolder.getArrayList().size();
         grid.setVgap(2);
+        if(size == 0){
+            return;
+        }
         for (int i = 0; i < 50; i ++){
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(HelloController.class.getResource("adElement.fxml"));
