@@ -222,9 +222,7 @@ public class DBMethods
         {
             String iAsString = String.valueOf(i);
             Document testDoc = new Document("ID",iAsString);
-            ArrayList<String> tagList = new ArrayList<>();
-            tagList = (ArrayList<String>) handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("tags");
-            if (tagList.contains(tag))
+            if (handler.getMainDB().getCollection("ads").find(testDoc).cursor().next().get("tag").equals(tag))
             {
                 ans.add(handler.getMainDB().getCollection("ads").find(testDoc).cursor().next());
             }
@@ -311,33 +309,68 @@ public class DBMethods
 
     public static ArrayList<Document> globalSearch (String city , String tag , String text , String minPrice , String maxPrice)
     {
-        ArrayList<Document> ans = new ArrayList<>();
-        Gson gson = new Gson();
         DBHandler handler = new DBHandler();
-        Document doc = new Document();
-        if(!city.equals(""))
+        ArrayList<Document> cities = new ArrayList<>();
+        ArrayList<Document> tags = new ArrayList<>();
+        ArrayList<Document> texts = new ArrayList<>();
+        ArrayList<Document> prices = new ArrayList<>();
+        ArrayList<Document> ans = new ArrayList<>();
+        if (!city.equals("")) // if city isn't empty , then we are searching based on city
         {
-            doc.append("city" , city);
+            cities = DBMethods.findAdByCity(city);
         }
+
+        if (!tag.equals("")) // if tag isn't empty , them we are searching based on tag
+        {
+            tags = DBMethods.findAdByTag(tag);
+        }
+
+        if (!text.equals("")) // if text isn't empty , then we are searching based on text
+        {
+            texts = DBMethods.findAdByText(text);
+        }
+
+        if (!minPrice.equals("") && !maxPrice.equals(""))
+        {
+            prices = DBMethods.findAdByPriceRange(minPrice , maxPrice);
+        }
+
+        ans = cities;
+
         if (!tag.equals(""))
         {
-            doc.append("tag" , tag);
+            for (Document doc : ans)
+            {
+                if (!tags.contains(doc))
+                {
+                    ans.remove(doc);
+                }
+            }
         }
-        for (int i = 0 ; i < AD.counter ; i++) // iterating on all ads in DB
+
+        if (!text.equals(""))
         {
-            doc.append("ID" , String.valueOf(i));
-            doc = handler.getMainDB().getCollection("ads").find(doc).cursor().next();
-            AD ad = gson.fromJson(doc.toJson() , AD.class);
-            if (!((ad.getInfo().contains(text) || ad.getName().contains(text))))
+            for (Document doc : ans)
             {
-                continue;
+                if (!texts.contains(doc))
+                {
+                    ans.remove(doc);
+                }
             }
-            if (!((Integer.parseInt(ad.getPrice().toString()) <= Integer.parseInt(maxPrice) && Integer.parseInt(ad.getPrice()) >= Integer.parseInt(maxPrice))))
-            {
-                continue;
-            }
-            ans.add(doc);
         }
+
+        if (!minPrice.equals(""))
+        {
+            for (Document doc : ans)
+            {
+                if (!prices.contains(doc))
+                {
+                    ans.remove(doc);
+                }
+            }
+        }
+
+        handler.getMongoClient().close();
         return ans;
     }
 

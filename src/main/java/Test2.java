@@ -21,7 +21,7 @@ public class Test2
         String b = "b";
         list.add(b);
         list.add(a);
-        AD ad = new AD("test" , "testA" , "testB" , "a" , "aaaaaaaaaaa" ,list );
+        AD ad = new AD("test" , "testA" , "testB" , "a" , "aaaaaaaaaaa" , a);
         //calendar.add(Calendar.MONTH, -4);
         //ad.setExpirationDate(calendar.getTime());
         DBMethods.makeNewAD(ad);

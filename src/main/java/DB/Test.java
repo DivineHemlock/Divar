@@ -1,6 +1,7 @@
 package DB;
 
 import com.google.gson.JsonArray;
+import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -23,9 +24,9 @@ public class Test
         list_b.add(b);
         User user = new User("john" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
         User user1 = new User("alireza" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
-        AD ad = new AD("pizza-a" , "a" , "20000" , "a","hello" , list_a);
+        AD ad = new AD("pizza-a" , "a" , "20000" , "a","hello" , a);
         AD ad2 = new AD("pizza-a" , "b" , "2500" , "a","hello" ,b);
-        AD ad3 = new AD("pizza-a" , "c" , "1000" ,"a","hello" , list_a);
+        AD ad3 = new AD("pizza-a" , "c" , "1000" ,"a","hello" , a);
         AD ad4 = new AD("pizza-a" , "d" , "900" , "a","hello" , a);
         AD ad5 = new AD("pizza-b" , "e" , "2000000000" , "a","hello" , a);
         AD ad6 = new AD("pizza-b" , "f" , "2000" , "a","hello" , a);
@@ -54,7 +55,16 @@ public class Test
         DBMethods.addChat(chat1);
         //System.out.println(DBMethods.findChatByOneUsername("a").get(1).get("messages"));
         //System.out.println(AD.counter);
-        System.out.println(user.getBookmarkIDs());
-        System.out.println(DBMethods.findUsersBookmarkedAds("john"));
+        //System.out.println(user.getBookmarkIDs());
+        //System.out.println(DBMethods.findUsersBookmarkedAds("john"));
+        //System.out.println(DBMethods.globalSearch("" , "a" , "" , "" , "").get(0).get("name"));
+        //System.out.println(DBMethods.findAdByTag("b").get(0).get("name").toString());
+        //System.out.println(DBMethods.findAdByPriceRange("0" , "100000").get(0).get("name"));
+        //Document document = new Document();
+        //document.append("tag" , "a");
+        //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next());
+        //System.out.println(DBMethods.findAdByText("hello").get(0).get("name").toString());
+        //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next().toString());
+
     }
 }
