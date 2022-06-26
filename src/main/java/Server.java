@@ -129,21 +129,21 @@ public class Server {
         return response;
     }
 
+    public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
+        DataInputStream is = new DataInputStream(socket.getInputStream());
+
+        byte[] b = new byte[16000];
+        is.read(b, 0, b.length);
+        fr.write(b, 0, b.length);
+    }
+
     public static void sendFile(FileInputStream fr, Socket socket) throws IOException {
-        OutputStream os = socket.getOutputStream();
+        DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 
         byte b[] = new byte[16000];
         fr.read(b, 0, b.length);
 
         os.write(b, 0, b.length);
-    }
-
-    public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
-        InputStream is = socket.getInputStream();
-
-        byte[] b = new byte[16000];
-        is.read(b, 0, b.length);
-        fr.write(b, 0, b.length);
     }
 }
 
