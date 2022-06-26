@@ -46,8 +46,8 @@ public class Server {
     private static class ClientHandler implements Runnable{
 
         private final Socket clientSocket;
-        PrintWriter out;
-        BufferedReader in;
+        DataOutputStream out;
+        DataInputStream in;
 
         public ClientHandler(Socket socket){
             this.clientSocket = socket;
@@ -58,8 +58,8 @@ public class Server {
         public void run() {
             try {
                 Gson gson = new Gson();
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                out = new DataOutputStream(clientSocket.getOutputStream());
+                in = new DataInputStream(clientSocket.getInputStream());
 
                 JSONParser parser = new JSONParser();
 
@@ -67,7 +67,7 @@ public class Server {
 
 
                 while (true){
-                    requestJson = in.readLine();
+                    requestJson = in.readUTF();
                     if (requestJson == null){
                         break;
                     }
@@ -79,7 +79,7 @@ public class Server {
                         case "Login" -> {
                             Request response = responseLogin(data);
                             String responseJson = gson.toJson(response);
-                            out.println(responseJson);
+                            out.writeUTF(responseJson);
                             out.flush();
                         }
                         case "signUp" ->{
@@ -87,7 +87,7 @@ public class Server {
                             String username = gson.fromJson(data,User.class).getUsername();
                             Request response = responseSignUP(data);
                             String responseJson = gson.toJson(response);
-                            out.println(responseJson);
+                            out.writeUTF(responseJson);
                             out.flush();
                             if(response.getId().equals("scSignUp")){
                                 File file = new File(HelloController.class.getResource("/profiles/" +
@@ -100,14 +100,14 @@ public class Server {
                             Request response = new Request();
                             response = responseCreateAd(data);
                             String responseJson = gson.toJson(response);
-                            out.println(responseJson);
+                            out.writeUTF(responseJson);
                             out.flush();
                         }
                         case  "search" ->{
                             System.out.println("kk");
                             Request response = responseSearch(data);
                             String responseJson = gson.toJson(response);
-                            out.println(responseJson);
+                            out.writeUTF(responseJson);
                             out.flush();
                         }
                     }

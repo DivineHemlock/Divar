@@ -23,14 +23,14 @@ public class Client {
     String host = "127.0.0.1";
     int port = 32002;
 
-    PrintWriter out;
-    BufferedReader in;
+    DataOutputStream out;
+    DataInputStream in;
     Socket socket;
 
     public Client() throws IOException {
         socket = new Socket(host, port);
-        this.out = new PrintWriter(socket.getOutputStream(), true);;
-        this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.out = new DataOutputStream(socket.getOutputStream());
+        this.in = new DataInputStream(socket.getInputStream());
         listenForMessage();
     }
 
@@ -39,7 +39,7 @@ public class Client {
 
 //        String jsonRequest = gson.toJson(request);
         String jsonRequest = gson.toJson(request);
-        out.println(jsonRequest);
+        out.writeUTF(jsonRequest);
         out.flush();
     }
 
@@ -53,7 +53,7 @@ public class Client {
 
                 while (socket.isConnected()) {
                     try {
-                        response = in.readLine();
+                        response = in.readUTF();
 
                         Request jsonToClassResponse = gson.fromJson(response, Request.class);
 //                        System.out.println(response);
