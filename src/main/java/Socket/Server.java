@@ -83,16 +83,13 @@ public class Server {
                             out.flush();
                         }
                         case "signUp" ->{
-                            System.out.println("haloooo");
                             String username = gson.fromJson(data,User.class).getUsername();
                             Request response = responseSignUP(data);
                             String responseJson = gson.toJson(response);
                             out.writeUTF(responseJson);
                             out.flush();
                             if(response.getId().equals("scSignUp")){
-                                File file = new File(HelloController.class.getResource("/profiles/" +
-                                        username +".jpg").toString());
-                                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                                FileOutputStream fileOutputStream = new FileOutputStream("D:\\ap\\divar3\\Divar\\src\\main\\resources\\com\\example\\divar3\\profiles\\java.png");
                                 getFile(fileOutputStream,clientSocket);
                             }
                         }
@@ -207,7 +204,7 @@ public class Server {
     public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
         DataInputStream is = new DataInputStream(socket.getInputStream());
 
-        byte[] b = new byte[16000];
+        byte[] b = new byte[1600000];
         is.read(b, 0, b.length);
         fr.write(b, 0, b.length);
     }
@@ -215,7 +212,7 @@ public class Server {
     public static void sendFile(FileInputStream fr, Socket socket) throws IOException {
         DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 
-        byte b[] = new byte[16000];
+        byte b[] = new byte[1600000];
         fr.read(b, 0, b.length);
 
         os.write(b, 0, b.length);

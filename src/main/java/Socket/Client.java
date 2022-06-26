@@ -85,7 +85,7 @@ public class Client {
                             }
                             case "scSignUP" -> {
                                 File file = FileHolder.getPic();
-                                FileInputStream fileInputStream = new FileInputStream(file);
+                                FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
                                 sendFile(fileInputStream,socket);
                                 Platform.runLater(
                                         () -> {
@@ -168,7 +168,7 @@ public class Client {
     public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
         DataInputStream is = new DataInputStream(socket.getInputStream());
 
-        byte[] b = new byte[16000];
+        byte[] b = new byte[1600000];
         is.read(b, 0, b.length);
         fr.write(b, 0, b.length);
     }
@@ -176,7 +176,7 @@ public class Client {
     public static void sendFile(FileInputStream fr, Socket socket) throws IOException {
         DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 
-        byte b[] = new byte[16000];
+        byte b[] = new byte[1600000];
         fr.read(b, 0, b.length);
 
         os.write(b, 0, b.length);
