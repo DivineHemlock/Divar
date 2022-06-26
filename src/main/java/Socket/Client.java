@@ -84,9 +84,10 @@ public class Client {
 
                             }
                             case "scSignUP" -> {
-                                File file = FileHolder.getPic();
-                                FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
-                                sendFile(fileInputStream,socket);
+//                                File file = FileHolder.getPic();
+//                                FileInputStream fileInputStream = new FileInputStream("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg");
+                                String path = "/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg";
+                                sendProfile(path, socket);
                                 Platform.runLater(
                                         () -> {
                                             PageController.close();
@@ -165,21 +166,40 @@ public class Client {
     }
 
 
-    public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
-        DataInputStream is = new DataInputStream(socket.getInputStream());
-
-        byte[] b = new byte[1600000];
-        is.read(b, 0, b.length);
-        fr.write(b, 0, b.length);
+    private static void receiveFile (String name, Socket socket) throws IOException {
+        DataInputStream DIS = new DataInputStream(socket.getInputStream());
+        int bytes = 0;
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(name);
+            long size = DIS.readLong();
+            byte[] buffer = new byte[4 * 1024];
+            while (size > 0 && (bytes = DIS.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {
+                fileOutputStream.write(buffer, 0, bytes);
+                size -= bytes;
+            }
+            fileOutputStream.close();
+        }catch(IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
-    public static void sendFile(FileInputStream fr, Socket socket) throws IOException {
-        DataOutputStream os = new DataOutputStream(socket.getOutputStream());
+    private static void sendProfile (String name, Socket socket) throws IOException {
+        DataOutputStream DOS = new DataOutputStream(socket.getOutputStream());
 
-        byte b[] = new byte[1600000];
-        fr.read(b, 0, b.length);
-
-        os.write(b, 0, b.length);
+        try {
+            int bytes = 0;
+            File file = new File(name);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            DOS.writeLong(file.length());
+            byte[] buffer = new byte[4 * 1024];
+            while ((bytes = fileInputStream.read(buffer)) != -1) {
+                DOS.write(buffer, 0, bytes);
+                DOS.flush();
+            }
+            fileInputStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 }
