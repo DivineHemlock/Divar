@@ -1,5 +1,6 @@
 package Socket;
 
+import DB.AD;
 import DB.DBMethods;
 import DB.User;
 import com.example.divar3.controller.PageController;
@@ -83,6 +84,13 @@ public class Server {
                             out.println(responseJson);
                             out.flush();
                         }
+                        case "createAd" ->{
+                            Request response = new Request();
+                            response = responseCreateAd(data);
+                            String responseJson = gson.toJson(response);
+                            out.println(responseJson);
+                            out.flush();
+                        }
                     }
                 }
             } catch (IOException e) {
@@ -125,7 +133,6 @@ public class Server {
     }
 
     public static Request responseSignUP(String data){
-        System.out.println("heyyyyy");
         Request response = new Request();
         Gson gson = new Gson();
         User user = gson.fromJson(data,User.class);
@@ -136,6 +143,24 @@ public class Server {
         else {
             response.setId("failSignUP");
         }
+        return response;
+    }
+
+    public static Request responseCreateAd(String data){
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(data, JsonObject.class);
+        String title = jsonObject.get("title").toString();
+        String price = jsonObject.get("price").toString();
+        String tag = jsonObject.get("tag").toString();
+        String details = jsonObject.get("details").toString();
+        String city = jsonObject.get("city").toString();
+        String phoneNumber = jsonObject.get("phoneNumber").toString();
+        String username = jsonObject.get("username").toString();
+        AD ad = new AD(title,city,price,username,details,tag,phoneNumber);
+        DBMethods.makeNewAD(ad);
+        Request response = new Request();
+        response.setData(ad.getID());
+        response.setId("createdAd");
         return response;
     }
 }

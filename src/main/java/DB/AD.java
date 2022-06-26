@@ -19,7 +19,9 @@ public class AD
     private String ID;
     private String tag;
 
-    public AD(String name, String city, String price, String username,String info, String tag)
+    private String phoneNumber;
+
+    public AD(String name, String city, String price, String username,String info, String tag , String phoneNumber)
     {
         this.name = name;
         this.city = city;
@@ -33,6 +35,7 @@ public class AD
         this.ID = String.valueOf(counter);
         this.pictureName = ID;
         this.tag = tag;
+        this.phoneNumber = phoneNumber;
         AD.counter += 1;
     }
 
@@ -114,5 +117,13 @@ public class AD
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

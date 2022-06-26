@@ -2,8 +2,12 @@ package com.example.divar3.controller;
 
 import DB.AD;
 import DB.User;
+import Socket.Request;
+import com.example.divar3.ClientHolder;
 import com.example.divar3.HelloController;
 import com.example.divar3.UserHolder;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +56,8 @@ public class CreateAdController {
     }
 
     @FXML
-    void createAdClicked(ActionEvent event) {
+    void createAdClicked(ActionEvent event) throws IOException, ParseException {
+        Gson gson = new Gson();
         invalidPriceLabel.setVisible(false);
         if (areFieldsEmpty()){
             return;
@@ -69,8 +75,20 @@ public class CreateAdController {
         if (UserHolder.getUser().getIsNumberPublic().equals("1")){
             phoneNumber = UserHolder.getUser().getPhoneNumber();
         }
-        AD ad = new AD("","",
-                "",)
+        String username = UserHolder.getUser().getUsername();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("title", title);
+        jsonObject.addProperty("price", price);
+        jsonObject.addProperty("tag", tag);
+        jsonObject.addProperty("details",details);
+        jsonObject.addProperty("city", city);
+        jsonObject.addProperty("phoneNumber", phoneNumber);
+        jsonObject.addProperty("username", username);
+        String data = gson.toJson(jsonObject);
+        Request request = new Request();
+        request.setId("createAd");
+        request.setData(data);
+        ClientHolder.getClient().sendRequest(request);
     }
 
     @FXML

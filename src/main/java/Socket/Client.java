@@ -5,11 +5,13 @@ import java.io.*;
 import java.net.Socket;
 
 import DB.User;
+import com.example.divar3.PictureNameHolder;
 import com.example.divar3.UserHolder;
 import com.example.divar3.controller.LoginController;
 import com.example.divar3.controller.PageController;
 import com.example.divar3.controller.SignUpController;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import org.json.simple.parser.ParseException;
@@ -106,8 +108,9 @@ public class Client {
                                             signUpController.userError();
                                         }
                                 );
-
-
+                            }
+                            case  "createdAd" ->{
+                                    createdAd(jsonToClassResponse);
                             }
                         }
                     } catch (IOException e) {
@@ -133,6 +136,11 @@ public class Client {
                 }
         );
 
+    }
+
+    private void createdAd(Request response){
+        PictureNameHolder.setAdPictureName(response.getData());
+        System.out.println(response.getData());
     }
 
 }
