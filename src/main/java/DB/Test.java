@@ -24,12 +24,12 @@ public class Test
         User user = new User("john" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
         User user1 = new User("alireza" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
         AD ad = new AD("pizza-a" , "a" , "20000" , "a","hello" , list_a);
-        AD ad2 = new AD("pizza-a" , "b" , "2500" , "a","hello" , list_a);
+        AD ad2 = new AD("pizza-a" , "b" , "2500" , "a","hello" ,b);
         AD ad3 = new AD("pizza-a" , "c" , "1000" ,"a","hello" , list_a);
-        AD ad4 = new AD("pizza-a" , "d" , "900" , "a","hello" , list_a);
-        AD ad5 = new AD("pizza-b" , "e" , "2000000000" , "a","hello" , list_b);
-        AD ad6 = new AD("pizza-b" , "f" , "2000" , "a","hello" , list_b);
-        AD ad7 = new AD("pizza-b" , "g" , "2000" ,"a","hello" , list_b);
+        AD ad4 = new AD("pizza-a" , "d" , "900" , "a","hello" , a);
+        AD ad5 = new AD("pizza-b" , "e" , "2000000000" , "a","hello" , a);
+        AD ad6 = new AD("pizza-b" , "f" , "2000" , "a","hello" , a);
+        AD ad7 = new AD("pizza-b" , "g" , "2000" ,"a","hello" , a);
         //System.out.println(AD.counter);
         user.addBookmark("0");
         user.addBookmark("1");

@@ -17,9 +17,9 @@ public class AD
     private Date expirationDate;
     private String info;
     private String ID;
-    private ArrayList<String> tags = new ArrayList<>();
+    private String tag;
 
-    public AD(String name, String city, String price, String username,String info, ArrayList<String> tags)
+    public AD(String name, String city, String price, String username,String info, String tag)
     {
         this.name = name;
         this.city = city;
@@ -32,7 +32,7 @@ public class AD
         this.info = info;
         this.ID = String.valueOf(counter);
         this.pictureName = ID;
-        this.tags = tags;
+        this.tag = tag;
         AD.counter += 1;
     }
 
@@ -108,11 +108,11 @@ public class AD
         this.ID = ID;
     }
 
-    public ArrayList<String> getTags() {
-        return tags;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
