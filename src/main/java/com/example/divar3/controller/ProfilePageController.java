@@ -83,4 +83,12 @@ public class ProfilePageController {
         PageController.open("menu");
     }
 
+    @FXML
+    void myAdsClicked(ActionEvent event) throws IOException, ParseException {
+        Request request = new Request();
+        request.setId("findMyAds");
+        request.setData(UserHolder.getUser().getUsername());
+        ClientHolder.getClient().sendRequest(request);
+    }
+
 }

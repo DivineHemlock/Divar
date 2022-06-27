@@ -49,5 +49,6 @@
       <Label fx:id="usernameField" alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="137.0" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: &quot;18df8e&quot;; -fx-background-radius: 20;" text="Username" textFill="WHITE" />
       <Label fx:id="cityField" alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="178.0" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: &quot;18df8e&quot;; -fx-background-radius: 20;" text="city" textFill="WHITE" />
       <Label fx:id="phoneNumberField" alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="217.0" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: &quot;18df8e&quot;; -fx-background-radius: 20;" text="Phone number" textFill="WHITE" />
+      <Button layoutX="477.0" layoutY="292.0" mnemonicParsing="false" onAction="#myAdsClicked" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: &quot;24f03a&quot;; -fx-background-radius: 20;" text="Show my ads" textFill="WHITE" />
    </children>
 </AnchorPane>

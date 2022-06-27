@@ -153,6 +153,12 @@ public class Server {
                             out.writeUTF(responseJson);
                             out.flush();
                         }
+                        case "findMyAds" ->{
+                            Request response = responseMyAds(data) ;
+                            String responseJson = gson.toJson(response);
+                            out.writeUTF(responseJson);
+                            out.flush();
+                        }
                     }
                 }
             } catch (IOException e) {
@@ -192,7 +198,6 @@ public class Server {
             response.setId("SC Login");
             String city = user.getCity();
             ArrayList<Document> jsonResult = DBMethods.findAdByCity(city);
-            System.out.println(jsonResult.size());
             for (int i = 0; i < jsonResult.size(); i++){
                 AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
                 ads.add(ad);
@@ -275,6 +280,21 @@ public class Server {
         Request response = new Request();
         response.setId("searchResult");
         ArrayList<Document> jsonResult = DBMethods.findUsersBookmarkedAds(username);
+        ArrayList<AD> ads = new ArrayList<>();
+        for (int i = 0; i < jsonResult.size(); i++){
+            AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
+            ads.add(ad);
+        }
+        response.setData(gson.toJson(ads));
+        return response;
+    }
+
+    public static Request responseMyAds(String data){
+        Gson gson = new Gson();
+        String username = data;
+        Request response = new Request();
+        response.setId("searchResult");
+        ArrayList<Document> jsonResult = DBMethods.findUserAds(username);
         ArrayList<AD> ads = new ArrayList<>();
         for (int i = 0; i < jsonResult.size(); i++){
             AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
