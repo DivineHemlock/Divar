@@ -24,6 +24,7 @@ public class Test
         list_b.add(b);
         User user = new User("john" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
         User user1 = new User("alireza" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
+
         AD ad = new AD("pizza-a" , "a" , "20000" , "a","hello" , "","");
         AD ad2 = new AD("pizza-a" , "b" , "2500" , "a","hello" ,"","");
         AD ad3 = new AD("pizza-a" , "c" , "1000" ,"a","hello" , "","");
@@ -65,6 +66,6 @@ public class Test
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next());
         //System.out.println(DBMethods.findAdByText("hello").get(0).get("name").toString());
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next().toString());
-        System.out.println(DBMethods.findAdByCity("new york").get(0).get("name").toString());
+
     }
 }

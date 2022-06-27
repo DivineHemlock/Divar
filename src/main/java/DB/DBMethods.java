@@ -133,6 +133,23 @@ public class DBMethods
         return ans;
     }
 
+    public static ArrayList<Document> findUserAds (String username)
+    {
+        DBHandler handler = new DBHandler();
+        ArrayList<Document> ans = new ArrayList<>();
+        for (int i = 0 ; i < AD.counter ; i++)
+        {
+            Document document = new Document();
+            document.append("ID" , String.valueOf(i));
+            if (handler.getMainDB().getCollection("ads").find(document).cursor().next().get("username").toString().equals(username))
+            {
+                ans.add(handler.getMainDB().getCollection("ads").find(document).cursor().next());
+            }
+        }
+        handler.getMongoClient().close();
+        return ans;
+    }
+
     //******************************************************************************************************
     //********************************************** USER METHODS ******************************************
     //******************************************************************************************************
