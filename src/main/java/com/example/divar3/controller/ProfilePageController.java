@@ -31,7 +31,7 @@ public class ProfilePageController {
     @FXML
     private Label usernameField;
 
-    @Override
+
     public void initialize(){
         User user = UserHolder.getUser();
         usernameField.setText(user.getUsername());
