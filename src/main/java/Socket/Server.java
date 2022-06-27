@@ -16,11 +16,15 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Server {
     private ArrayList<ClientHandler> clients;
 
     public static void main(String[] args) {
+        deleteExpiredAdHourly();
+
         DBHandler handler = new DBHandler();
         handler.getMainDB().drop();
         handler.getMongoClient().close();
@@ -339,6 +343,22 @@ public class Server {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public static void deleteExpiredAdHourly(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(1000 * 2);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    DBMethods.deleteExpiredAds();
+                }
+            }
+        }).start();
     }
 
 }
