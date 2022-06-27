@@ -133,7 +133,7 @@ public class Server {
         DataInputStream is = new DataInputStream(socket.getInputStream());
 
         byte[] b = new byte[16000];
-        is.read(b, 0, b.length);
+        is.readFully(b);
         fr.write(b, 0, b.length);
     }
 
