@@ -73,8 +73,8 @@ public class CreateAdController {
         String tag = tagChoiceBox.getValue();
         String details = detailsTextField.getText();
         String city = UserHolder.getUser().getCity();
-        System.out.println(city);
         String phoneNumber = "not available";
+        System.out.println(UserHolder.getUser().getIsNumberPublic() + "*********");
         if (UserHolder.getUser().getIsNumberPublic().equals("1")){
             phoneNumber = UserHolder.getUser().getPhoneNumber();
         }

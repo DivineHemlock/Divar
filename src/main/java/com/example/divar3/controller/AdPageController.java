@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class AdPageController {
 
     @FXML
     public void initialize(){
-        File file = new File(HelloController.class.getResource("ad/ad.jpg").getFile());
+        File file = new File("user/ad.jpg");
         adImage.setImage(new Image(file.getAbsolutePath()));
         AD ad = ADHolder.getAd();
         dateLabel.setText(ad.getSubmitDate().toString());
@@ -87,12 +88,14 @@ public class AdPageController {
     }
 
     @FXML
-    void bookmarkClicked(ActionEvent event) {
+    void bookmarkClicked(ActionEvent event) throws IOException, ParseException {
         if (bookmark.isSelected()){
             UserHolder.getUser().addBookmark(ADHolder.getAd().getID());
+            UserHolder.updateUserInDataBase();
         }
         else {
             UserHolder.getUser().removeBookmark(ADHolder.getAd().getID());
+            UserHolder.updateUserInDataBase();
         }
     }
 

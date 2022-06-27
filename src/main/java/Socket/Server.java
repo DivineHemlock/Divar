@@ -131,6 +131,28 @@ public class Server {
                             out.flush();
                             sendProfile(file.getAbsolutePath(),clientSocket);
                         }
+                        case "getADPhoto" ->{
+                            Request response = new Request();
+                            String adId = data;
+                            response.setId("sendADPicture");
+                            String responseJson = gson.toJson(response);
+                            File file = new File("./ads/" + adId +".jpg");
+                            out.writeUTF(responseJson);
+                            out.flush();
+                            sendProfile(file.getAbsolutePath(),clientSocket);
+                        }
+                        case "updateUser"  ->{
+                            User user = gson.fromJson(data,User.class);
+                            System.out.println(user.getUsername());
+                            DBMethods.deleteUser(user.getUsername());
+                            DBMethods.makeNewUser(user);
+                        }
+                        case "findBookmark" ->{
+                            Request response = responseBookmark(data) ;
+                            String responseJson = gson.toJson(response);
+                            out.writeUTF(responseJson);
+                            out.flush();
+                        }
                     }
                 }
             } catch (IOException e) {
@@ -247,6 +269,21 @@ public class Server {
         response.setData(gson.toJson(ads));
         return response;
     }
+    public static Request responseBookmark(String data){
+        Gson gson = new Gson();
+        String username = data;
+        Request response = new Request();
+        response.setId("searchResult");
+        ArrayList<Document> jsonResult = DBMethods.findUsersBookmarkedAds(username);
+        ArrayList<AD> ads = new ArrayList<>();
+        for (int i = 0; i < jsonResult.size(); i++){
+            AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
+            ads.add(ad);
+        }
+        response.setData(gson.toJson(ads));
+        return response;
+    }
+
 
     private static void receiveFile (String name, Socket socket) throws IOException {
         DataInputStream DIS = new DataInputStream(socket.getInputStream());

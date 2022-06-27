@@ -116,6 +116,16 @@ public class Client {
                             }
                             case  "createdAd" ->{
                                 sendProfile(FileHolder.getPic().getAbsolutePath(),socket);
+                                Platform.runLater(
+                                        () -> {
+                                            PageController.close();
+                                            try {
+                                                PageController.open("menu");
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                        }
+                                );
                             }
                             case "searchResult" ->{
                                 String data = jsonToClassResponse.getData();
@@ -136,6 +146,10 @@ public class Client {
                             }
                             case "sendUserProfile" ->{
                                 File file = new File("user/user.jpg");
+                                receiveFile(file.getAbsolutePath(),socket);
+                            }
+                            case "sendADPicture" ->{
+                                File file = new File("user/ad.jpg");
                                 receiveFile(file.getAbsolutePath(),socket);
                             }
                         }
