@@ -434,7 +434,9 @@ public class DBMethods
             String iAsString = String.valueOf(i);
             Document testDoc = new Document("ID" ,iAsString);
             Document chat = handler.getMainDB().getCollection("chats").find(testDoc).cursor().next();
-            if (chat.get("userAUsername").toString().equals(username_a) && chat.get("userBUsername").toString().equals(username_b))
+            boolean flag = chat.get("userAUsername").toString().equals(username_a) && chat.get("userBUsername").toString().equals(username_b);
+            boolean flag2 = chat.get("userAUsername").toString().equals(username_b) && chat.get("userBUsername").toString().equals(username_a);
+            if (flag || flag2)
             {
                 Document ans = handler.getMainDB().getCollection("chats").find(testDoc).cursor().next();
                 handler.getMongoClient().close();

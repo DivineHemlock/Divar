@@ -1,9 +1,6 @@
 package Socket;
 
-import DB.AD;
-import DB.DBHandler;
-import DB.DBMethods;
-import DB.User;
+import DB.*;
 import com.example.divar3.HelloController;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -163,6 +160,12 @@ public class Server {
                             out.writeUTF(responseJson);
                             out.flush();
                         }
+                        case "getChatBox" ->{
+                            Request response = responseChat(data) ;
+                            String responseJson = gson.toJson(response);
+                            out.writeUTF(responseJson);
+                            out.flush();
+                        }
                     }
                 }
             } catch (IOException e) {
@@ -305,6 +308,19 @@ public class Server {
             ads.add(ad);
         }
         response.setData(gson.toJson(ads));
+        return response;
+    }
+
+    public static Request responseChat (String data)
+    {
+        Gson gson = new Gson();
+        JsonObject users = gson.fromJson(data , JsonObject.class);
+        String user1 = users.get("username").getAsString();
+        String user2 = users.get("adOwnerUsername").getAsString();
+        Document doc = DBMethods.findChatByTwoUsernames(user1 , user2);
+        Request response = new Request();
+        response.setId("responseChat");
+        response.setData(doc.toJson());
         return response;
     }
 

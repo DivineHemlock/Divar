@@ -1,9 +1,14 @@
 package com.example.divar3.controller;
 
 import DB.AD;
+import DB.DBMethods;
+import Socket.Request;
 import com.example.divar3.ADHolder;
+import com.example.divar3.ClientHolder;
 import com.example.divar3.HelloController;
 import com.example.divar3.UserHolder;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -60,9 +65,23 @@ public class AdPageController {
         }
     }
     @FXML
-    void chatClicked(ActionEvent event) throws IOException {
-        PageController.close();
-        PageController.open("chatBox");
+    void chatClicked(ActionEvent event) throws IOException, ParseException {
+        Gson gson = new Gson();
+        JsonObject data = new JsonObject();
+        Request request = new Request();
+        request.setId("getChatBox");
+        String username = UserHolder.getUser().getUsername();
+        String adOwnerUsername = ADHolder.getAd().getUsername();
+        if (username.equals(adOwnerUsername))
+        {
+            return;
+        }
+        data.addProperty("username" , username);
+        data.addProperty("adOwnerUsername" , adOwnerUsername);
+        String jsonData = gson.toJson(data);
+        request.setData(jsonData);
+        ClientHolder.getClient().sendRequest(request);
+
     }
 
 

@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import DB.AD;
+import DB.Chat;
 import DB.User;
 import com.example.divar3.*;
 import com.example.divar3.controller.LoginController;
@@ -152,6 +153,9 @@ public class Client {
                                 File file = new File("user/ad.jpg");
                                 receiveFile(file.getAbsolutePath(),socket);
                             }
+                            case  "responseChat" ->{
+
+                            }
                         }
                     } catch (IOException | ParseException e) {
                         e.printStackTrace();
@@ -159,6 +163,14 @@ public class Client {
                 }
             }
         }).start();
+    }
+
+    private void responseChat (String data)
+    {
+        Gson gson = new Gson();
+        Chat chat = gson.fromJson(data , Chat.class);
+        ChatHolder.setChat(chat);
+
     }
 
     private void scLogin(String data) throws IOException {
@@ -220,5 +232,7 @@ public class Client {
             System.err.println(e.getMessage());
         }
     }
+
+
 
 }
