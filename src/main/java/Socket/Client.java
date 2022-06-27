@@ -86,9 +86,9 @@ public class Client {
                             case "scSignUP" -> {
 
 //                                File file = FileHolder.getPic();
-                                FileInputStream fileInputStream = new FileInputStream("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg");
-//                                String path = "/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg";
-                                sendFile(fileInputStream, socket);
+//                                FileInputStream fileInputStream = new FileInputStream("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg");
+                                String path = "/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg";
+                                sendProfile(path, socket);
 
                                 Platform.runLater(
                                         () -> {
@@ -171,23 +171,6 @@ public class Client {
     private void createdAd(Request response){
         PictureNameHolder.setAdPictureName(response.getData());
         System.out.println(response.getData());
-    }
-
-    public static void getFile(FileOutputStream fr, Socket socket) throws IOException {
-        DataInputStream is = new DataInputStream(socket.getInputStream());
-
-        byte[] b = new byte[16000];
-        is.readFully(b);
-        fr.write(b, 0, b.length);
-    }
-
-    public static void sendFile(FileInputStream fr, Socket socket) throws IOException {
-        DataOutputStream os = new DataOutputStream(socket.getOutputStream());
-
-        byte b[] = new byte[16000];
-        fr.read(b, 0, b.length);
-
-        os.write(b, 0, b.length);
     }
 
     private static void receiveFile (String name, Socket socket) throws IOException {
