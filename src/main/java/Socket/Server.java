@@ -351,7 +351,7 @@ public class Server {
             public void run() {
                 while (true) {
                     try {
-                        Thread.sleep(1000 * 2);
+                        Thread.sleep(1000 * 60 * 60);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
