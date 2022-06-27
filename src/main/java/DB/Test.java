@@ -1,6 +1,7 @@
 package DB;
 
 import com.google.gson.JsonArray;
+import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -54,7 +55,16 @@ public class Test
         DBMethods.addChat(chat1);
         //System.out.println(DBMethods.findChatByOneUsername("a").get(1).get("messages"));
         //System.out.println(AD.counter);
-        System.out.println(user.getBookmarkIDs());
-        System.out.println(DBMethods.findUsersBookmarkedAds("john"));
+        //System.out.println(user.getBookmarkIDs());
+        //System.out.println(DBMethods.findUsersBookmarkedAds("john"));
+        //System.out.println(DBMethods.globalSearch("" , "a" , "" , "" , "").get(0).get("name"));
+        //System.out.println(DBMethods.findAdByTag("b").get(0).get("name").toString());
+        //System.out.println(DBMethods.findAdByPriceRange("0" , "100000").get(0).get("name"));
+        //Document document = new Document();
+        //document.append("tag" , "a");
+        //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next());
+        //System.out.println(DBMethods.findAdByText("hello").get(0).get("name").toString());
+        //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next().toString());
+
     }
 }
