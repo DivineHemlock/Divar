@@ -66,6 +66,6 @@ public class Test
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next());
         //System.out.println(DBMethods.findAdByText("hello").get(0).get("name").toString());
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next().toString());
-
+        //System.out.println(DBMethods.findChatByOneUsername("a").get(0));
     }
 }

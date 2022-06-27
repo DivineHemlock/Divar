@@ -317,7 +317,11 @@ public class Server {
         JsonObject users = gson.fromJson(data , JsonObject.class);
         String user1 = users.get("username").getAsString();
         String user2 = users.get("adOwnerUsername").getAsString();
-        Document doc = DBMethods.findChatByTwoUsernames(user1 , user2);
+        if (DBMethods.findChatByTwoUsernames(user1 , user2) == null)
+        {
+            DBMethods.addChat(new Chat(user1 , user2));
+        }
+        Document doc = DBMethods.findChatByTwoUsernames(user1,user2);
         Request response = new Request();
         response.setId("responseChat");
         response.setData(doc.toJson());

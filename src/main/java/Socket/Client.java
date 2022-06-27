@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import DB.AD;
 import DB.Chat;
+import DB.Message;
 import DB.User;
 import com.example.divar3.*;
 import com.example.divar3.controller.LoginController;
@@ -17,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import org.bson.Document;
 import org.json.simple.parser.ParseException;
 
 
@@ -154,7 +156,11 @@ public class Client {
                                 receiveFile(file.getAbsolutePath(),socket);
                             }
                             case  "responseChat" ->{
-
+                                Chat chat = gson.fromJson(jsonToClassResponse.getData() , Chat.class);
+                                for (Message message : chat.getMessages())
+                                {
+                                    System.out.println(message.getText());
+                                }
                             }
                         }
                     } catch (IOException | ParseException e) {

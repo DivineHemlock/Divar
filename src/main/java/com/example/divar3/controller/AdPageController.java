@@ -81,7 +81,6 @@ public class AdPageController {
         String jsonData = gson.toJson(data);
         request.setData(jsonData);
         ClientHolder.getClient().sendRequest(request);
-
     }
 
 

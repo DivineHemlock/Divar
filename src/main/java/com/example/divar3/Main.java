@@ -30,7 +30,7 @@ public class Main extends Application{
        Client client = new Client();
        ClientHolder.setClient(client);
        launch(args);
-        launch();
+        //launch();
         //File file = new File(HelloController.class.getResource("/profile/kk.txt").toString());
     }
 
