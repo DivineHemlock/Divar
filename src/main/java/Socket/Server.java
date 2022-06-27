@@ -1,10 +1,12 @@
 package Socket;
 
 import DB.AD;
+import DB.DBHandler;
 import DB.DBMethods;
 import DB.User;
 import com.example.divar3.HelloController;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.bson.Document;
 import org.json.simple.JSONObject;
@@ -19,6 +21,9 @@ public class Server {
     private ArrayList<ClientHandler> clients;
 
     public static void main(String[] args) {
+        DBHandler handler = new DBHandler();
+        handler.getMainDB().drop();
+        handler.getMongoClient().close();
         ServerSocket server = null;
         try{
             server = new ServerSocket(32002);
@@ -88,12 +93,6 @@ public class Server {
                             String responseJson = gson.toJson(response);
                             out.writeUTF(responseJson);
                             out.flush();
-                            if(response.getId().equals("scSignUp")){
-//                                FileOutputStream fileOutputStream = new FileOutputStream("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/Divar/src/main/java/test.jpg");
-//                                getFile(fileOutputStream, in);
-                                String path = "/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/Divar/src/main/java/test.jpg";
-                                receiveFile(path, clientSocket);
-                            }
                         }
                         case "createAd" ->{
                             Request response = new Request();
@@ -102,9 +101,14 @@ public class Server {
                             out.writeUTF(responseJson);
                             out.flush();
                         }
-                        case  "search" ->{
-                            System.out.println("kk");
-                            Request response = responseSearch(data);
+                        case  "searchPrice" ->{
+                            Request response = responseSearchPrice(data);
+                            String responseJson = gson.toJson(response);
+                            out.writeUTF(responseJson);
+                            out.flush();
+                        }
+                        case "searchTag" ->{
+                            Request response = responseSearchTag(data);
                             String responseJson = gson.toJson(response);
                             out.writeUTF(responseJson);
                             out.flush();
@@ -139,13 +143,24 @@ public class Server {
         String password = userPass.get("password").toString();
         JsonObject jsonObject = DBMethods.findUserInDB(username, password);
         User user = gson.fromJson(jsonObject, User.class);
+        ArrayList<AD> ads = new ArrayList<>();
         Request response = new Request();
         if(user == null){
             response.setId("Fail Login");
         }
         else {
             response.setId("SC Login");
-            response.setData(gson.toJson(user));
+            String city = user.getCity();
+            ArrayList<Document> jsonResult = DBMethods.findAdByCity(city);
+            System.out.println(jsonResult.size());
+            for (int i = 0; i < jsonResult.size(); i++){
+                AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
+                ads.add(ad);
+            }
+            ArrayList<String> responseData = new ArrayList<>();
+            responseData.add(gson.toJson(ads));
+            responseData.add(gson.toJson(user));
+            response.setData(gson.toJson(responseData));
         }
         return response;
     }
@@ -167,13 +182,13 @@ public class Server {
     public static Request responseCreateAd(String data){
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(data, JsonObject.class);
-        String title = jsonObject.get("title").toString();
-        String price = jsonObject.get("price").toString();
-        String tag = jsonObject.get("tag").toString();
-        String details = jsonObject.get("details").toString();
-        String city = jsonObject.get("city").toString();
-        String phoneNumber = jsonObject.get("phoneNumber").toString();
-        String username = jsonObject.get("username").toString();
+        String title = jsonObject.get("title").getAsString();
+        String price = jsonObject.get("price").getAsString();
+        String tag = jsonObject.get("tag").getAsString();
+        String details = jsonObject.get("details").getAsString();
+        String city = jsonObject.get("city").getAsString();
+        String phoneNumber = jsonObject.get("phoneNumber").getAsString();
+        String username = jsonObject.get("username").getAsString();
         AD ad = new AD(title,city,price,username,details,tag,phoneNumber);
         DBMethods.makeNewAD(ad);
         Request response = new Request();
@@ -181,25 +196,34 @@ public class Server {
         response.setId("createdAd");
         return response;
     }
-    public static Request responseSearch (String data){
+    public static Request responseSearchPrice(String data){
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(data, JsonObject.class);
-        String searchText  = jsonObject.get("search").toString();
-        String min = jsonObject.get("min").toString();
-        String max = jsonObject.get("max").toString();
-        String city = jsonObject.get("city").toString();
-        String tag = jsonObject.get("tag").toString();
-        ArrayList<Document> jsonResult = DBMethods.globalSearch(city,tag,searchText,min,max);
+        String min = jsonObject.get("min").getAsString();
+        String max = jsonObject.get("max").getAsString();
+        Request response = new Request();
+        response.setId("searchResult");
+        ArrayList<Document> jsonResult = DBMethods.findAdByPriceRange(min,max);
         ArrayList<AD> ads = new ArrayList<>();
         for (int i = 0; i < jsonResult.size(); i++){
             AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
             ads.add(ad);
         }
-        String responseData = gson.toJson(ads);
+        response.setData(gson.toJson(ads));
+        return response;
+    }
+    public static Request responseSearchTag(String data){
+        Gson gson = new Gson();
+        String tag = data;
         Request response = new Request();
         response.setId("searchResult");
-        response.setData(responseData);
-        System.out.println(response.getId());
+        ArrayList<Document> jsonResult = DBMethods.findAdByTag(tag);
+        ArrayList<AD> ads = new ArrayList<>();
+        for (int i = 0; i < jsonResult.size(); i++){
+            AD ad = gson.fromJson(jsonResult.get(i).toJson(), AD.class);
+            ads.add(ad);
+        }
+        response.setData(gson.toJson(ads));
         return response;
     }
 

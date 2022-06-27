@@ -32,18 +32,22 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: &quot;314A82&quot;;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.divar3.controller.menuController">
    <children>
-      <TextField fx:id="searchTextfield" layoutX="201.0" layoutY="87.0" prefHeight="25.0" prefWidth="230.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
-      <Button layoutX="133.0" layoutY="86.0" mnemonicParsing="false" onAction="#searchClicked" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 50;">
+      <Button layoutX="78.0" layoutY="100.0" mnemonicParsing="false" onAction="#searchClicked" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 50;">
          <graphic>
             <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -80,17 +84,26 @@
             <Image url="@EBay_logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="minField" layoutX="135.0" layoutY="143.0" prefHeight="25.0" prefWidth="141.0" promptText="Min price" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" visible="false" />
-      <TextField fx:id="maxField" layoutX="281.0" layoutY="143.0" prefHeight="25.0" prefWidth="141.0" promptText="Max price" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" visible="false" />
-      <ChoiceBox fx:id="tagChoiceBox" layoutX="135.0" layoutY="187.0" prefHeight="25.0" prefWidth="273.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" visible="false" />
-      <Button layoutX="438.0" layoutY="87.0" mnemonicParsing="false" onAction="#moreClicked" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: &quot;2196f3&quot;; -fx-background-radius: 50;">
-         <graphic>
-            <ImageView fitHeight="7.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@whiteMoreIcon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <TextField fx:id="minField" layoutX="78.0" layoutY="146.0" prefHeight="25.0" prefWidth="141.0" promptText="Min price" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <TextField fx:id="maxField" layoutX="229.0" layoutY="146.0" prefHeight="25.0" prefWidth="141.0" promptText="Max price" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <ChoiceBox fx:id="tagChoiceBox" layoutX="379.0" layoutY="146.0" prefHeight="25.0" prefWidth="141.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <ChoiceBox fx:id="searchChoiceBox" layoutX="150.0" layoutY="103.0" prefHeight="25.0" prefWidth="273.0" style="-fx-background-radius: 100; -fx-background-color: &quot;C1D3FC&quot;;" />
+      <ScrollPane layoutX="61.0" layoutY="183.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="156.0" prefWidth="473.0" style="-fx-background-color: &quot;314A82&quot;;">
+         <content>
+            <GridPane fx:id="grid" alignment="CENTER_RIGHT" prefHeight="106.0" prefWidth="497.0" style="-fx-background-color: &quot;314A82&quot;;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="299.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="299.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="47.66667175292969" minHeight="0.0" prefHeight="3.3333391348520927" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="102.6666608651479" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </GridPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -11,9 +11,9 @@ public class Test
     public static void main(String[] args)
     {
         DBHandler handler = new DBHandler();
-        handler.getMainDB().getCollection("ads").drop();
-        handler.getMainDB().getCollection("chats").drop();
-        handler.getMainDB().getCollection("users").drop();
+        //handler.getMainDB().getCollection("ads").drop();
+        //handler.getMainDB().getCollection("chats").drop();
+        //handler.getMainDB().getCollection("users").drop();
         //System.out.println(User.makeUserObjectWithJson(DBMethods.findUserInDB("a")).getBookmarkIDs());
         String a = "a";
         String b = "b";
@@ -65,6 +65,6 @@ public class Test
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next());
         //System.out.println(DBMethods.findAdByText("hello").get(0).get("name").toString());
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next().toString());
-
+        System.out.println(DBMethods.findAdByCity("new york").get(0).get("name").toString());
     }
 }

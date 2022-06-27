@@ -1,18 +1,21 @@
 package com.example.divar3.controller;
 
 import Socket.Request;
-import com.example.divar3.ClientHolder;
+import com.example.divar3.*;
 import com.example.divar3.HelloController;
-import com.example.divar3.UserHolder;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
@@ -26,19 +29,48 @@ public class menuController {
     private TextField maxField;
 
     @FXML
+    private GridPane grid;
+
+
+    @FXML
     private TextField minField;
 
-    @FXML
-    private Button moreButton;
 
-    @FXML
-    private TextField searchTextfield;
 
     @FXML
     private ChoiceBox<String> tagChoiceBox;
 
+    @FXML
+    private ChoiceBox<String> searchChoiceBox;
+
+
     public void initialize() throws IOException {
         setTagChoiceBox();
+        setSearchChoiceBox();
+        int columns = 0;
+        int rows = 2;
+        int size = CitySearchHolder.getArrayList().size();
+        grid.setVgap(2);
+        if(size == 0){
+            return;
+        }
+        for (int i = 0; i < 50; i ++){
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(HelloController.class.getResource("adElementCity.fxml"));
+            AnchorPane adElement = fxmlLoader.load();
+            AdEllementCityController adEllementCityController = fxmlLoader.getController();
+            adEllementCityController.setIndexOfAd(i);
+            adEllementCityController.initializeWhenSet();
+            if (columns == 2){
+                columns = 0;
+                rows ++;
+            }
+            grid.add(adElement, columns++, rows);
+            if (i == size - 1){
+                break;
+            }
+        }
+
     }
 
     @FXML
@@ -48,8 +80,9 @@ public class menuController {
     }
 
     @FXML
-    void profileButtonClicked(ActionEvent event) {
-
+    void profileButtonClicked(ActionEvent event) throws IOException {
+        PageController.close();
+        PageController.open("profile");
     }
 
     @FXML
@@ -60,52 +93,25 @@ public class menuController {
 
     @FXML
     void searchClicked(ActionEvent event) throws IOException, ParseException {
-        if (searchTextfield.getText().equals("empty")){
+        Gson gson = new Gson();
+        if(!validityOfSearch()){
+            minField.setText("");
+            maxField.setText("");
             return;
         }
-        String city = UserHolder.getUser().getCity();
-        String search = searchTextfield.getText();
-        String min = minField.getText();
-        String max = maxField.getText();
-        String tag = tagChoiceBox.getValue();
-        if(tagChoiceBox.getValue() == null){
-            tag = "";
-        }
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("city", city);
-        jsonObject.addProperty("search", search);
-        jsonObject.addProperty("min", min);
-        jsonObject.addProperty("max", max);
-        jsonObject.addProperty("tag", tag);
-        Gson gson = new Gson();
-        Request request = new Request();
-        request.setId("search");
-        String data = gson.toJson(jsonObject);
-        request.setData(data);
-        ClientHolder.getClient().sendRequest(request);
-    }
-
-    @FXML
-    void moreClicked(ActionEvent event) {
-        if (!maxField.visibleProperty().getValue()){
-            maxField.setVisible(true);
-            minField.setVisible(true);
-            tagChoiceBox.setVisible(true);
+        if(searchChoiceBox.getValue().equals("Price")){
+            sendPriceRequest();
         }
         else {
-            emptyMore();
-            maxField.setVisible(false);
-            minField.setVisible(false);
-            tagChoiceBox.setVisible(false);
+            String tag = tagChoiceBox.getValue();
+            Request request = new Request();
+            request.setId("searchTag");
+            request.setData(tag);
+            ClientHolder.getClient().sendRequest(request);
         }
+
     }
 
-    //empty nods that appear when more is shown
-    public void emptyMore(){
-        maxField.setText("");
-        minField.setText("");
-        tagChoiceBox.setValue("");
-    }
 
     private void setTagChoiceBox () throws IOException {
         File file = new File(HelloController.class.getResource("tags.txt").getFile());
@@ -117,6 +123,72 @@ public class menuController {
         ObservableList<String> observableList = FXCollections.observableArrayList(cities);
         tagChoiceBox.setItems(observableList);
     }
+
+    private void setSearchChoiceBox(){
+        ArrayList<String> searchMethod = new ArrayList<>();
+        searchMethod.add("Price");
+        searchMethod.add("Tag");
+        ObservableList<String> observableList = FXCollections.observableArrayList(searchMethod);
+        searchChoiceBox.setItems(observableList);
+    }
+    private boolean validityOfSearch(){
+        if (searchChoiceBox.getValue() == null){
+            return false;
+        }
+        if(searchChoiceBox.getValue().equals("Price")){
+            if (validityOfPrice()){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (tagChoiceBox.getValue() == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validityOfPrice(){
+        if (minField.getText().equals("")||maxField.getText().equals("")){
+            return false;
+        }
+        try {
+            double d1 = Double.parseDouble(minField.getText());
+            double d2 = Double.parseDouble(maxField.getText());
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    private void sendPriceRequest() throws IOException, ParseException {
+        Gson gson = new Gson();
+        JsonObject jsonData = new JsonObject();
+        String min;
+        String max;
+        Double d1 = Double.parseDouble(minField.getText());
+        Double d2 = Double.parseDouble(maxField.getText());
+        if (d1 < d2){
+            max = maxField.getText();
+            min = minField.getText();
+        }
+        else {
+            max = minField.getText();
+            min =maxField.getText();
+        }
+        Request request = new Request();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("min",min);
+        jsonObject.addProperty("max",max);
+        request.setData(gson.toJson(jsonObject));
+        request.setId("searchPrice");
+        ClientHolder.getClient().sendRequest(request);
+    }
+
 
 
 }

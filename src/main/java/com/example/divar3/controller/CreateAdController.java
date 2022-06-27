@@ -71,6 +71,7 @@ public class CreateAdController {
         String tag = tagChoiceBox.getValue();
         String details = detailsTextField.getText();
         String city = UserHolder.getUser().getCity();
+        System.out.println(city);
         String phoneNumber = "not available";
         if (UserHolder.getUser().getIsNumberPublic().equals("1")){
             phoneNumber = UserHolder.getUser().getPhoneNumber();
@@ -108,8 +109,9 @@ public class CreateAdController {
     }
 
     @FXML
-    void profileButtonClicked(ActionEvent event) {
-
+    void profileButtonClicked(ActionEvent event) throws IOException {
+        PageController.close();
+        PageController.open("profile");
     }
 
     @FXML

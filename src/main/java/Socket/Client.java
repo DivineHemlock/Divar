@@ -84,10 +84,6 @@ public class Client {
 
                             }
                             case "scSignUP" -> {
-//                                File file = FileHolder.getPic();
-//                                FileInputStream fileInputStream = new FileInputStream("/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg");
-                                String path = "/Users/aryanneizehbaz/Aryan8221/coding_projects/java_projects/test2/src/main/java/java.jpg";
-                                sendProfile(path, socket);
                                 Platform.runLater(
                                         () -> {
                                             PageController.close();
@@ -127,6 +123,7 @@ public class Client {
                                         () -> {
 
                                             try {
+                                                PageController.close();
                                                 PageController.open("adView");
                                             } catch (IOException e) {
                                                 throw new RuntimeException(e);
@@ -145,7 +142,12 @@ public class Client {
 
     private void scLogin(String data) throws IOException {
         Gson gson = new Gson();
-        User user = gson.fromJson(data,User.class);
+        TypeToken<ArrayList<String>> userSearch = new TypeToken<ArrayList<String>>() {};
+        ArrayList<String> responseData = gson.fromJson(data,userSearch.getType());
+        TypeToken<ArrayList<AD>> token = new TypeToken<ArrayList<AD>>() {};
+        ArrayList<AD> ads = gson.fromJson(responseData.get(0),token.getType());
+        CitySearchHolder.setArrayList(ads);
+        User user = gson.fromJson(responseData.get(1),User.class);
         UserHolder.setUser(user);
         Platform.runLater(
                 () -> {

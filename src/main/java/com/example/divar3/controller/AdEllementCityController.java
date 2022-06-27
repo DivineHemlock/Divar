@@ -2,6 +2,7 @@ package com.example.divar3.controller;
 
 import DB.AD;
 import com.example.divar3.ADHolder;
+import com.example.divar3.CitySearchHolder;
 import com.example.divar3.SearchResultHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +11,7 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AdElementController {
-
+public class AdEllementCityController {
     private int indexOfAd;
     @FXML
     private Label addText;
@@ -21,15 +21,15 @@ public class AdElementController {
 
     @FXML
     public void initializeWhenSet(){
-        addText.setText(SearchResultHolder.getArrayList().get(indexOfAd).getName());
-        priceText.setText(SearchResultHolder.getArrayList().get(indexOfAd).getPrice());
+        addText.setText(CitySearchHolder.getArrayList().get(indexOfAd).getName());
+        priceText.setText(CitySearchHolder.getArrayList().get(indexOfAd).getPrice());
     }
 
     @FXML
     void buttonClicked(ActionEvent event) throws IOException {
-        ArrayList<AD> arrayList =SearchResultHolder.getArrayList();
+        ArrayList<AD> arrayList = CitySearchHolder.getArrayList();
+        ADHolder.setReturnToMenu(true);
         ADHolder.setAd(arrayList.get(indexOfAd));
-        ADHolder.setReturnToMenu(false);
         PageController.close();
         PageController.open("AdPage");
     }

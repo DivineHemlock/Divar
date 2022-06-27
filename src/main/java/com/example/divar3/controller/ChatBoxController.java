@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+
 public class ChatBoxController {
 
     @FXML
@@ -17,8 +19,8 @@ public class ChatBoxController {
     private TextField messageTextField;
 
     public void initialize(){
-        for (int i = 1; i <= 10; i++){
-            Label label = new Label("message from reciver -20");
+        for (int i = 1; i <= 2; i++){
+            Label label = new Label("message from reciver " + i);
             label.setStyle("-fx-background-color :   \"C1D3FC\"");
             label.setPrefWidth(chatBox.getPrefWidth() -20);
             label.setAlignment(Pos.CENTER_LEFT);
@@ -27,13 +29,15 @@ public class ChatBoxController {
         }
     }
     @FXML
-    void profileButtonClicked(ActionEvent event) {
-
+    void profileButtonClicked(ActionEvent event) throws IOException {
+        PageController.close();
+        PageController.open("profile");
     }
 
     @FXML
-    void returnClicked(ActionEvent event) {
-
+    void returnClicked(ActionEvent event) throws IOException {
+        PageController.close();
+        PageController.open("adPage");
     }
 
     @FXML

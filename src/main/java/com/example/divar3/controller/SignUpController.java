@@ -97,7 +97,6 @@ public class SignUpController {
         Request request = new Request();
         request.setData(gson.toJson(user));
         request.setId("signUp");
-        FileHolder.setPic(image);
         ClientHolder.getClient().sendRequest(request);
     }
 

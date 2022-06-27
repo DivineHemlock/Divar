@@ -17,8 +17,9 @@ public class AdViewController {
     private GridPane grid;
 
     @FXML
-    void profileButtonClicked(ActionEvent event) {
-
+    void profileButtonClicked(ActionEvent event) throws IOException {
+        PageController.close();
+        PageController.open("profile");
     }
 
     public void initialize() throws IOException {

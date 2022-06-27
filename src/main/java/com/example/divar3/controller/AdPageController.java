@@ -3,6 +3,7 @@ package com.example.divar3.controller;
 import DB.AD;
 import com.example.divar3.ADHolder;
 import com.example.divar3.HelloController;
+import com.example.divar3.UserHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -52,10 +53,15 @@ public class AdPageController {
         priceLabel.setText(ad.getPrice());
         titleLabel.setText(ad.getName());
         detailsField.setText(ad.getInfo());
+        phoneNumberLabel.setText(ad.getPhoneNumber());
+        if (UserHolder.getUser().getBookmarkIDs().contains(ad.getID())){
+            bookmark.setSelected(true);
+        }
     }
     @FXML
-    void chatClicked(ActionEvent event) {
-
+    void chatClicked(ActionEvent event) throws IOException {
+        PageController.close();
+        PageController.open("chatBox");
     }
 
 
@@ -72,12 +78,22 @@ public class AdPageController {
     @FXML
     void returnClicked(ActionEvent event) throws IOException {
         PageController.close();
-        PageController.open("adView");
+        if(ADHolder.getReturnToMenu()){
+            PageController.open("menu");
+        }
+        else {
+            PageController.open("adView");
+        }
     }
 
     @FXML
     void bookmarkClicked(ActionEvent event) {
-        System.out.println(bookmark.isSelected());
+        if (bookmark.isSelected()){
+            UserHolder.getUser().addBookmark(ADHolder.getAd().getID());
+        }
+        else {
+            UserHolder.getUser().removeBookmark(ADHolder.getAd().getID());
+        }
     }
 
 }
