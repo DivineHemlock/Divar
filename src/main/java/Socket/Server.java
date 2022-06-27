@@ -93,13 +93,21 @@ public class Server {
                             String responseJson = gson.toJson(response);
                             out.writeUTF(responseJson);
                             out.flush();
+                            if(response.getId().equals("scSignUP")){
+                                File file = new File("./profiles/" + username +".jpg");
+                                receiveFile(file.getAbsolutePath(),clientSocket);
+                            }
                         }
                         case "createAd" ->{
                             Request response = new Request();
-                            response = responseCreateAd(data);
+                            AD ad = createAd(data);
+                            response = responseCreateAd(ad);
                             String responseJson = gson.toJson(response);
+                            String idAd = ad.getID();
                             out.writeUTF(responseJson);
                             out.flush();
+                            File file = new File("./ads/" + ad.getID() +".jpg");
+                            receiveFile(file.getAbsolutePath(),clientSocket);
                         }
                         case  "searchPrice" ->{
                             Request response = responseSearchPrice(data);
@@ -112,6 +120,16 @@ public class Server {
                             String responseJson = gson.toJson(response);
                             out.writeUTF(responseJson);
                             out.flush();
+                        }
+                        case "getProfilePhoto" ->{
+                            Request response = new Request();
+                            String username = data;
+                            response.setId("sendUserProfile");
+                            String responseJson = gson.toJson(response);
+                            File file = new File("./profiles/" + username +".jpg");
+                            out.writeUTF(responseJson);
+                            out.flush();
+                            sendProfile(file.getAbsolutePath(),clientSocket);
                         }
                     }
                 }
@@ -179,7 +197,7 @@ public class Server {
         return response;
     }
 
-    public static Request responseCreateAd(String data){
+    public static AD createAd(String data){
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(data, JsonObject.class);
         String title = jsonObject.get("title").getAsString();
@@ -190,9 +208,12 @@ public class Server {
         String phoneNumber = jsonObject.get("phoneNumber").getAsString();
         String username = jsonObject.get("username").getAsString();
         AD ad = new AD(title,city,price,username,details,tag,phoneNumber);
+        return ad;
+    }
+
+    public static Request responseCreateAd(AD ad){
         DBMethods.makeNewAD(ad);
         Request response = new Request();
-        response.setData(ad.getID());
         response.setId("createdAd");
         return response;
     }

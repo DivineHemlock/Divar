@@ -4,6 +4,7 @@ import DB.AD;
 import DB.User;
 import Socket.Request;
 import com.example.divar3.ClientHolder;
+import com.example.divar3.FileHolder;
 import com.example.divar3.HelloController;
 import com.example.divar3.UserHolder;
 import com.google.gson.Gson;
@@ -53,6 +54,7 @@ public class CreateAdController {
 
     public void initialize() throws IOException {
         setTagChoiceBox();
+        image = new File("ad.jpg");
     }
 
     @FXML
@@ -89,6 +91,7 @@ public class CreateAdController {
         Request request = new Request();
         request.setId("createAd");
         request.setData(data);
+        FileHolder.setPic(image);
         ClientHolder.getClient().sendRequest(request);
     }
 

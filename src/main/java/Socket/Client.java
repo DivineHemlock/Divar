@@ -60,6 +60,7 @@ public class Client {
                         switch (jsonToClassResponse.getId()){
                             case "SC Login" -> {
                                 scLogin(jsonToClassResponse.getData());
+                                FileHolder.updateUserProfile();
                             }
                             case "Fail Login" -> {
                                 try {
@@ -84,6 +85,8 @@ public class Client {
 
                             }
                             case "scSignUP" -> {
+                                File file = FileHolder.getPic();
+                                sendProfile(file.getAbsolutePath(),socket);
                                 Platform.runLater(
                                         () -> {
                                             PageController.close();
@@ -112,7 +115,7 @@ public class Client {
                                 );
                             }
                             case  "createdAd" ->{
-                                    createdAd(jsonToClassResponse);
+                                sendProfile(FileHolder.getPic().getAbsolutePath(),socket);
                             }
                             case "searchResult" ->{
                                 String data = jsonToClassResponse.getData();
@@ -131,8 +134,12 @@ public class Client {
                                         }
                                 );
                             }
+                            case "sendUserProfile" ->{
+                                File file = new File("user/user.jpg");
+                                receiveFile(file.getAbsolutePath(),socket);
+                            }
                         }
-                    } catch (IOException e) {
+                    } catch (IOException | ParseException e) {
                         e.printStackTrace();
                     }
                 }
@@ -162,10 +169,6 @@ public class Client {
 
     }
 
-    private void createdAd(Request response){
-        PictureNameHolder.setAdPictureName(response.getData());
-        System.out.println(response.getData());
-    }
 
 
     private static void receiveFile (String name, Socket socket) throws IOException {

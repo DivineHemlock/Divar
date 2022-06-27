@@ -30,4 +30,5 @@ public class ADHolder {
     public static void setAd(AD ad) {
         ADHolder.ad = ad;
     }
+
 }

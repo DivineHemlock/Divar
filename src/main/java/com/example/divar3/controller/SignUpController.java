@@ -71,7 +71,7 @@ public class SignUpController {
     //initialize for setting choice box
     public void initialize() throws IOException {
         setCityChoiceBox();
-        File file = new File(HelloController.class.getResource("user.jpg").toString());
+        image = new File("user.jpg");
     }
 
     @FXML
@@ -96,6 +96,8 @@ public class SignUpController {
                 "1","1");
         Request request = new Request();
         request.setData(gson.toJson(user));
+        FileHolder.setPic(image);
+        System.out.println(image.getAbsolutePath()+ "********");
         request.setId("signUp");
         ClientHolder.getClient().sendRequest(request);
     }
