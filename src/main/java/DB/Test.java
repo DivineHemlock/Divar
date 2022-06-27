@@ -24,8 +24,8 @@ public class Test
         list_b.add(b);
         User user = new User("john" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
         User user1 = new User("alireza" , "as" , "pizza" , "s" ,"23" , "gh" , "1" , " 2");
-        AD ad = new AD("pizza-a" , "a" , "20000" , "a","hello" , a);
-        AD ad2 = new AD("pizza-a" , "b" , "2500" , "a","hello" ,b);
+        AD ad = new AD("pizza-a" , "a" , "20000" , "john","hello" , a);
+        AD ad2 = new AD("paaaaa" , "b" , "2500" , "john","hello" ,b);
         AD ad3 = new AD("pizza-a" , "c" , "1000" ,"a","hello" , a);
         AD ad4 = new AD("pizza-a" , "d" , "900" , "a","hello" , a);
         AD ad5 = new AD("pizza-b" , "e" , "2000000000" , "a","hello" , a);
@@ -65,6 +65,6 @@ public class Test
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next());
         //System.out.println(DBMethods.findAdByText("hello").get(0).get("name").toString());
         //System.out.println(handler.getMainDB().getCollection("ads").find(document).cursor().next().toString());
-
+        //System.out.println(DBMethods.findUserAds("john"));
     }
 }
