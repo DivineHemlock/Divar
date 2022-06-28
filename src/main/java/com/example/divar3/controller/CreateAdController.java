@@ -74,7 +74,6 @@ public class CreateAdController {
         String details = detailsTextField.getText();
         String city = UserHolder.getUser().getCity();
         String phoneNumber = "not available";
-        System.out.println(UserHolder.getUser().getIsNumberPublic() + "*********");
         if (UserHolder.getUser().getIsNumberPublic().equals("1")){
             phoneNumber = UserHolder.getUser().getPhoneNumber();
         }

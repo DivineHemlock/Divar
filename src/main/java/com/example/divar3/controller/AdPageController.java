@@ -56,7 +56,7 @@ public class AdPageController {
         adImage.setImage(new Image(file.getAbsolutePath()));
         AD ad = ADHolder.getAd();
         dateLabel.setText(ad.getSubmitDate().toString());
-        priceLabel.setText(ad.getPrice());
+        priceLabel.setText(ad.getPrice() + "$");
         titleLabel.setText(ad.getName());
         detailsField.setText(ad.getInfo());
         phoneNumberLabel.setText(ad.getPhoneNumber());

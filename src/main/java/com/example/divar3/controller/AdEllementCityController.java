@@ -24,7 +24,7 @@ public class AdEllementCityController {
     @FXML
     public void initializeWhenSet(){
         addText.setText(CitySearchHolder.getArrayList().get(indexOfAd).getName());
-        priceText.setText(CitySearchHolder.getArrayList().get(indexOfAd).getPrice());
+        priceText.setText(CitySearchHolder.getArrayList().get(indexOfAd).getPrice() + "$");
     }
 
     @FXML

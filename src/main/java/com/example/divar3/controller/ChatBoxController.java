@@ -1,5 +1,12 @@
 package com.example.divar3.controller;
 
+import DB.Chat;
+import DB.Message;
+import Socket.Request;
+import com.example.divar3.ChatHolder;
+import com.example.divar3.ClientHolder;
+import com.example.divar3.UserHolder;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -7,8 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ChatBoxController {
 
@@ -18,14 +27,22 @@ public class ChatBoxController {
     @FXML
     private TextField messageTextField;
 
-    public void initialize(){
-        for (int i = 1; i <= 2; i++){
-            Label label = new Label("message from reciver " + i);
-            label.setStyle("-fx-background-color :   \"C1D3FC\"");
-            label.setPrefWidth(chatBox.getPrefWidth() -20);
-            label.setAlignment(Pos.CENTER_LEFT);
-            chatBox.getChildren().add(label);
+    public void initialize() {
+        Chat chat = ChatHolder.getChat();
+        ArrayList<Message> messages = chat.getMessages();
+        for (int i = 0; i < messages.size();i++){
+            Label messageLabel = new Label();
+            Message message = messages.get(i);
+            messageLabel.setText(message.getText());
+            messageLabel.setPrefWidth(600);
+            if(message.getSenderUsername().equals(UserHolder.getUser())){
+                messageLabel.setStyle("-fx-background-color :   \"5ce18e\"");
 
+            }
+            else {
+                messageLabel.setStyle("-fx-background-color :   \"ffffff\"");
+            }
+            chatBox.getChildren().add(messageLabel);
         }
     }
     @FXML
@@ -41,14 +58,22 @@ public class ChatBoxController {
     }
 
     @FXML
-    void sendClicked(ActionEvent event) {
-        String message = messageTextField.getText();
-        messageTextField.setText("");
-        Label label = new Label(message);
-        label.setStyle("-fx-background-color :   \"5ce18e\"");
-        label.setPrefWidth(chatBox.getPrefWidth() -20);
-        label.setAlignment(Pos.CENTER_RIGHT);
-        chatBox.getChildren().add(label);
+    void sendClicked(ActionEvent event) throws IOException, ParseException {
+        Gson gson = new Gson();
+        String sender;
+        String reciver;
+        sender = UserHolder.getUser().getUsername();
+        if(UserHolder.getUser().getUsername().equals(ChatHolder.getChat().getUserAUsername())){
+            reciver = ChatHolder.getChat().getUserBUsername();
+        }
+        else {
+            reciver = ChatHolder.getChat().getUserAUsername();
+        }
+        Message message = new Message(messageTextField.getText(),sender,reciver);
+        Request request = new Request();
+        request.setId("10");
+        request.setData(gson.toJson(message));
+        ClientHolder.getClient().sendRequest(request);
     }
 
 }

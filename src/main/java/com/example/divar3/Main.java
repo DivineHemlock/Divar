@@ -27,19 +27,13 @@ import java.util.Scanner;
 
 public class Main extends Application{
     public static void main(String[] args) throws IOException {
-       Client client = new Client();
-       ClientHolder.setClient(client);
-       launch(args);
-        //launch();
-        //File file = new File(HelloController.class.getResource("/profile/kk.txt").toString());
+        Client client = new Client();
+        ClientHolder.setClient(client);
+        launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = PageController.open("loginPage");
-        //AdViewController adViewController = loader.getController();
-        //adViewController.addButton();
-        //AdViewController adViewController = loader.getController();
-        //adViewController.addButton();
     }
 }

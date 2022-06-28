@@ -40,7 +40,6 @@ public class Client {
     public void sendRequest(Request request) throws IOException, ParseException {
         Gson gson = new Gson();
 
-//        String jsonRequest = gson.toJson(request);
         String jsonRequest = gson.toJson(request);
         out.writeUTF(jsonRequest);
         out.flush();
@@ -59,7 +58,6 @@ public class Client {
                         response = in.readUTF();
 
                         Request jsonToClassResponse = gson.fromJson(response, Request.class);
-//                        System.out.println(response);
                         switch (jsonToClassResponse.getId()){
                             case "SC Login" -> {
                                 scLogin(jsonToClassResponse.getData());
@@ -157,10 +155,17 @@ public class Client {
                             }
                             case  "responseChat" ->{
                                 Chat chat = gson.fromJson(jsonToClassResponse.getData() , Chat.class);
-                                for (Message message : chat.getMessages())
-                                {
-                                    System.out.println(message.getText());
-                                }
+                                ChatHolder.setChat(chat);
+                                Platform.runLater(
+                                        () -> {
+                                            PageController.close();
+                                            try {
+                                                PageController.open("chatBox");
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                        }
+                                );
                             }
                         }
                     } catch (IOException | ParseException e) {

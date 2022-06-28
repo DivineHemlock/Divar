@@ -166,6 +166,12 @@ public class Server {
                             out.writeUTF(responseJson);
                             out.flush();
                         }
+                        case "10" ->{
+                            Request response = responseMessage(data) ;
+                            String responseJson = gson.toJson(response);
+                            out.writeUTF(responseJson);
+                            out.flush();
+                        }
                     }
                 }
             } catch (IOException e) {
@@ -327,6 +333,19 @@ public class Server {
         response.setData(doc.toJson());
         return response;
     }
+    public static Request responseMessage(String data){
+        Gson gson = new Gson();
+        Message message = gson.fromJson(data,Message.class);
+        Document doc = DBMethods.findChatByTwoUsernames(message.getReceiverUsername(), message.getSenderUsername());
+        Chat chat = gson.fromJson(doc.toJson(),Chat.class);
+        DBMethods.updateChatWithNewMessage(chat,message);
+        Document updatedDoc = DBMethods.findChatByTwoUsernames(message.getReceiverUsername(), message.getSenderUsername());
+        Request response = new Request();
+        response.setData(updatedDoc.toJson());
+        response.setId("responseChat");
+        return response;
+    }
+
 
 
     private static void receiveFile (String name, Socket socket) throws IOException {

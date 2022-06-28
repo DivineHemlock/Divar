@@ -97,7 +97,6 @@ public class SignUpController {
         Request request = new Request();
         request.setData(gson.toJson(user));
         FileHolder.setPic(image);
-        System.out.println(image.getAbsolutePath()+ "********");
         request.setId("signUp");
         ClientHolder.getClient().sendRequest(request);
     }
